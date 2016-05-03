@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		18CB96233EAA62AE7E5B4618 /* Pods_Listenn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D18B52560359272E54FC7E82 /* Pods_Listenn.framework */; };
 		FA7CE0E91CD8D311001F4268 /* WikiArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CE0E81CD8D311001F4268 /* WikiArticle.swift */; };
+		FA7CE0EB1CD8DC1A001F4268 /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CE0EA1CD8DC1A001F4268 /* MapController.swift */; };
 		FA938B181CD84E5B00CD5E92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA938B171CD84E5B00CD5E92 /* AppDelegate.swift */; };
 		FA938B1A1CD84E5B00CD5E92 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA938B191CD84E5B00CD5E92 /* ViewController.swift */; };
 		FA938B1D1CD84E5B00CD5E92 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA938B1B1CD84E5B00CD5E92 /* Main.storyboard */; };
@@ -40,6 +41,7 @@
 		85929B717D0872683508A405 /* Pods-Listenn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listenn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Listenn/Pods-Listenn.release.xcconfig"; sourceTree = "<group>"; };
 		D18B52560359272E54FC7E82 /* Pods_Listenn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Listenn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA7CE0E81CD8D311001F4268 /* WikiArticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WikiArticle.swift; sourceTree = "<group>"; };
+		FA7CE0EA1CD8DC1A001F4268 /* MapController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		FA938B141CD84E5B00CD5E92 /* Listenn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Listenn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA938B171CD84E5B00CD5E92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA938B191CD84E5B00CD5E92 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +100,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FA7CE0EC1CD8DE47001F4268 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				FA7CE0E81CD8D311001F4268 /* WikiArticle.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		FA7CE0ED1CD8DE50001F4268 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA7CE0EA1CD8DC1A001F4268 /* MapController.swift */,
+				FA938B191CD84E5B00CD5E92 /* ViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		FA938B0B1CD84E5B00CD5E92 = {
 			isa = PBXGroup;
 			children = (
@@ -124,9 +143,9 @@
 			isa = PBXGroup;
 			children = (
 				FA938B171CD84E5B00CD5E92 /* AppDelegate.swift */,
-				FA938B191CD84E5B00CD5E92 /* ViewController.swift */,
 				FA938B1B1CD84E5B00CD5E92 /* Main.storyboard */,
-				FA7CE0E81CD8D311001F4268 /* WikiArticle.swift */,
+				FA7CE0ED1CD8DE50001F4268 /* View Controllers */,
+				FA7CE0EC1CD8DE47001F4268 /* Models */,
 				FA938B1E1CD84E5B00CD5E92 /* Assets.xcassets */,
 				FA938B201CD84E5B00CD5E92 /* LaunchScreen.storyboard */,
 				FA938B231CD84E5B00CD5E92 /* Info.plist */,
@@ -334,6 +353,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA7CE0EB1CD8DC1A001F4268 /* MapController.swift in Sources */,
 				FA938B1A1CD84E5B00CD5E92 /* ViewController.swift in Sources */,
 				FA7CE0E91CD8D311001F4268 /* WikiArticle.swift in Sources */,
 				FA938B181CD84E5B00CD5E92 /* AppDelegate.swift in Sources */,

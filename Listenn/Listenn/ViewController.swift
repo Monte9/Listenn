@@ -14,8 +14,10 @@ let kWikilocationBaseURL = "https://en.wikipedia.org"
 class ViewController: UIViewController, UISearchBarDelegate {
 
     @IBOutlet weak var mainView: UIView!
+    //container views for map and list
+    @IBOutlet weak var mapContainerView: UIView!
     
-    @IBOutlet weak var detailLabel: UILabel!
+    @IBOutlet weak var listContainerView: UIView!
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
@@ -23,7 +25,6 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var searchBar : UISearchBar!
     var searchBarDisplay : Bool! = false
     var searchedText: String?
-    
     
     // store wiki articles
     var queriedArticles = [WikiArticle]()
@@ -85,9 +86,11 @@ class ViewController: UIViewController, UISearchBarDelegate {
     @IBAction func indexChanged(sender: AnyObject) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            detailLabel.text = "Map view under construction"
+            mapContainerView.alpha = 1.0
+            listContainerView.alpha = 0.0
         case 1:
-            detailLabel.text = "List view coming soon"
+            mapContainerView.alpha = 0.0
+            listContainerView.alpha = 1.0
         default:
             break;
         }
