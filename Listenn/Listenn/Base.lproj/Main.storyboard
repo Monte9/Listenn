@@ -1,25 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="QaT-eY-0sx">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Listenn-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Listenn" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gAw-3Y-D3e">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Rrn-2C-FB7">
+                                        <rect key="frame" x="73" y="436" width="174" height="29"/>
+                                        <segments>
+                                            <segment title="Map"/>
+                                            <segment title="List"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="indexChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="Ol4-lx-y6p"/>
+                                        </connections>
+                                    </segmentedControl>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Map view under contruction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43F-Uf-cLE">
+                                        <rect key="frame" x="25" y="75" width="271" height="27"/>
+                                        <fontDescription key="fontDescription" name="Optima-Italic" family="Optima" pointSize="22"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="43F-Uf-cLE" firstAttribute="top" secondItem="gAw-3Y-D3e" secondAttribute="top" constant="75" id="Bbs-mN-j7r"/>
+                                    <constraint firstItem="Rrn-2C-FB7" firstAttribute="leading" secondItem="gAw-3Y-D3e" secondAttribute="leading" constant="73" id="GEy-p1-eH1"/>
+                                    <constraint firstItem="43F-Uf-cLE" firstAttribute="centerX" secondItem="gAw-3Y-D3e" secondAttribute="centerX" id="Qcj-Md-ZKa"/>
+                                    <constraint firstAttribute="bottom" secondItem="Rrn-2C-FB7" secondAttribute="bottom" constant="40" id="RHu-g0-37L"/>
+                                    <constraint firstItem="Rrn-2C-FB7" firstAttribute="centerX" secondItem="gAw-3Y-D3e" secondAttribute="centerX" id="rAe-81-gOV"/>
+                                    <constraint firstAttribute="trailing" secondItem="Rrn-2C-FB7" secondAttribute="trailing" constant="73" id="ueL-Jk-IdK"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gAw-3Y-D3e" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="5zZ-A6-oYm"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gAw-3Y-D3e" secondAttribute="bottom" id="IMY-x0-qDF"/>
+                            <constraint firstAttribute="trailing" secondItem="gAw-3Y-D3e" secondAttribute="trailing" id="Spe-pq-vWc"/>
+                            <constraint firstItem="gAw-3Y-D3e" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="fjr-zK-FV9"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Listenn" id="9KI-AY-CJe">
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="QCo-vH-oFp"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="7DQ-WQ-Ai1"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="detailLabel" destination="43F-Uf-cLE" id="b76-tB-esB"/>
+                        <outlet property="mainView" destination="gAw-3Y-D3e" id="39M-bu-R3n"/>
+                        <outlet property="segmentedControl" destination="Rrn-2C-FB7" id="PBP-0v-apb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="668" y="317"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Sl8-i1-hvy">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QaT-eY-0sx" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uGH-hY-eYx">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="a0w-2i-7Bl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RZr-gS-qBv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="136" y="317"/>
         </scene>
     </scenes>
+    <color key="tintColor" red="0.90588235294117647" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
 </document>
