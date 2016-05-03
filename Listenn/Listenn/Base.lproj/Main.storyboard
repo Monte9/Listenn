@@ -57,8 +57,15 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Listenn" id="9KI-AY-CJe">
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="QCo-vH-oFp"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="7DQ-WQ-Ai1"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="QCo-vH-oFp">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="7DQ-WQ-Ai1">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="searchButtonClicked:" destination="BYZ-38-t0r" id="5IC-fM-6WS"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="detailLabel" destination="43F-Uf-cLE" id="b76-tB-esB"/>
