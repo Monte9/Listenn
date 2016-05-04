@@ -14,7 +14,7 @@ The following features are implemented:
 
 ## Video Walkthrough 
 
-**Coming soon...**
+![Listenn app walkthrough](listenn.gif)
 
 ## Notes
 
