@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 let kWikilocationBaseURL = "https://en.wikipedia.org"
 
@@ -25,10 +24,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     var searchBar : UISearchBar!
     var searchBarDisplay : Bool! = false
     var searchedText: String?
-    
-    // store wiki articles
-    var queriedArticles = [WikiArticle]()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -97,36 +93,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
     }
     
     @IBAction func makeAPICall(sender: AnyObject) {
-        requestResource { (queriedArticles) in
-            for articles in queriedArticles {
-                print(articles.title)
-            }
-        }
-        
-    }
-    func requestResource(completion:(([WikiArticle]) -> Void)) {
-        print("Calling API here..")
-        
-        let path = "/w/api.php?action=query&format=json&list=geosearch&gscoord=37.808153%7C-122.476447&gsradius=10000"
-        let fullURLString = kWikilocationBaseURL + path
-        let url = NSURL(string: fullURLString)
-        
-        Alamofire.request(.GET, url!)
-            .responseJSON { response in
-            var articles = NSMutableOrderedSet()
-                
-            if let JSON = response.result.value {
-                if let result = JSON["query"] as? NSDictionary {
-                    if let jsonarticles = result["geosearch"]! as? NSArray {
-                        for item : AnyObject in jsonarticles {
-                            var article = WikiArticle(json: item as! Dictionary<String, AnyObject>)
-                            articles.addObject(article)
-                        }
-                    }
-                }
-            }
-            completion(articles.array as! [WikiArticle])
-        }
+        print("Implement settings here")
     }
     
     override func didReceiveMemoryWarning() {
