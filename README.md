@@ -8,15 +8,17 @@ Time spent: **5** hours spent in total
 
 The following features are implemented:
   
-- [ ] Map view showing all the landmarks annotated on the map 
-- [ ] List view showing all the landmarks within a 5 mile radius
-- [ ] Plays audio on tapping the a specific landmark
+- [x] Map view showing all the landmarks annotated on the map 
+- [x] List view showing all the landmarks within a 1 mile radius
+- [x] Plays audio on tapping a specific landmark on the list view
 
 ## Video Walkthrough 
 
 **Coming soon...**
 
 ## Notes
+
+The app uses Wikipedia API, Apple MapKit and text-to-speech features.
 
 Open to suggestions and feedback. Please email mthakkar@mail.sfsu.edu
 
