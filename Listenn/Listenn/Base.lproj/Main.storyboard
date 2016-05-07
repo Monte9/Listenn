@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Listenn-->
+        <!--Listnn-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Listenn" customModuleProvider="target" sceneMemberID="viewController">
@@ -68,7 +68,7 @@
                             <constraint firstItem="gAw-3Y-D3e" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="fjr-zK-FV9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Listenn" id="9KI-AY-CJe">
+                    <navigationItem key="navigationItem" title="Listnn" id="9KI-AY-CJe">
                         <barButtonItem key="leftBarButtonItem" systemItem="action" id="QCo-vH-oFp">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
@@ -125,18 +125,34 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="dgl-MW-JCK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <connections>
+                                    <outlet property="delegate" destination="FOn-7t-fqE" id="mpk-UP-fWP"/>
+                                </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kU8-Hf-vZd">
+                                <rect key="frame" x="246" y="378" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="CuG-KO-Plj"/>
+                                    <constraint firstAttribute="height" constant="40" id="mdv-3C-2tZ"/>
+                                </constraints>
+                                <state key="normal" image="MyLocation"/>
+                                <connections>
+                                    <action selector="goToMyLocationButton:" destination="FOn-7t-fqE" eventType="touchUpInside" id="YtD-CC-ZGI"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="kU8-Hf-vZd" secondAttribute="trailing" constant="34" id="0TT-YW-TlF"/>
                             <constraint firstAttribute="trailing" secondItem="dgl-MW-JCK" secondAttribute="trailing" id="O7T-6V-hH4"/>
+                            <constraint firstItem="CjJ-c7-zau" firstAttribute="top" secondItem="kU8-Hf-vZd" secondAttribute="bottom" constant="86" id="PQi-0L-lh1"/>
                             <constraint firstAttribute="bottom" secondItem="dgl-MW-JCK" secondAttribute="bottom" id="QQf-3A-7ih"/>
                             <constraint firstItem="dgl-MW-JCK" firstAttribute="leading" secondItem="37x-dx-3t0" secondAttribute="leading" id="jfC-x5-kw1"/>
                             <constraint firstItem="dgl-MW-JCK" firstAttribute="top" secondItem="37x-dx-3t0" secondAttribute="top" id="s07-IR-3RT"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="mapView" destination="dgl-MW-JCK" id="3MV-bf-6Rr"/>
+                        <outlet property="mapView" destination="dgl-MW-JCK" id="G4s-Yt-eVw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ler-3V-Zii" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -243,6 +259,7 @@
     </scenes>
     <resources>
         <image name="Info" width="32" height="32"/>
+        <image name="MyLocation" width="50" height="50"/>
         <image name="Sound" width="32" height="32"/>
     </resources>
     <color key="tintColor" red="0.90588235294117647" green="0.29803921568627451" blue="0.23529411764705882" alpha="1" colorSpace="calibratedRGB"/>
