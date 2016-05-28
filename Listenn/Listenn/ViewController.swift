@@ -35,11 +35,11 @@ class ViewController: UIViewController, UISearchBarDelegate {
         self.searchBar.sizeToFit()
         searchBar.placeholder = "Enter location"
         if (searchBarDisplay == false) {
-            navigationItem.title = "Listenn"
+            navigationItem.title = "Listnn"
         }
         
         //Customize the navigation bar title and color
-        navigationItem.title = "Listenn"
+        navigationItem.title = "Listnn"
         navigationController?.navigationBar.barTintColor = UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
@@ -50,7 +50,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         if (searchBarDisplay != true) {
             //Hide the search bar
             navigationItem.titleView = nil
-            navigationItem.title = "Listenn"
+            navigationItem.title = "Listnn"
             //Get the search text and make the search field empty
             searchedText = searchBar.text
             if searchedText != "" {
@@ -68,15 +68,26 @@ class ViewController: UIViewController, UISearchBarDelegate {
         searchBarDisplay = !searchBarDisplay
         //Hide the search bar
         navigationItem.titleView = nil
-        navigationItem.title = "Listenn"
+        navigationItem.title = "Listnn"
         //Get the search text and make the search field empty
         searchedText = searchBar.text
         if searchedText != "" {
             searchBar.text = ""
             print("Entered search location: \(searchedText)")
-            print("Perform segue/ reload the view here")
+            searchWithLocation(searchedText!)
         }
-        // performSegueWithIdentifier("searchSegue", sender: self)
+    }
+    
+    func searchWithLocation(location: String) {
+        print("User the GeoCoding API to get the latitude and longitude of the location entered which is \(location)")
+        SVGeocoder.geocode(location) { (placemarks: [AnyObject]!, urlResponse: NSHTTPURLResponse!, error: NSError!) in
+            
+            for each in placemarks {
+                print(each.coordinate.latitude)
+                print(each.coordinate.longitude)
+                let coordinates = CLLocationCoordinate2D(latitude: each.coordinate.latitude, longitude: each.coordinate.longitude)
+            }
+        }
     }
     
     @IBAction func indexChanged(sender: AnyObject) {
@@ -92,7 +103,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
-    @IBAction func makeAPICall(sender: AnyObject) {
+    @IBAction func appSettings(sender: AnyObject) {
         print("Implement settings here")
     }
     

@@ -13,7 +13,6 @@ import CoreLocation
 class MapController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
     
     // MARK: - Types
-    
     struct Constants {
         struct MapViewIdentifiers {
             static let sonarAnnotationView = "sonarAnnotationView"
@@ -27,6 +26,7 @@ class MapController: UIViewController, MKMapViewDelegate, CLLocationManagerDeleg
     
     var locationManager : CLLocationManager!
     var currentLocation : CLLocation?
+    var searchedLocation: CLLocation?
     
     //instance of the wikimanager to make request to the API
     let wikiManager = WikiManager();
@@ -53,14 +53,12 @@ class MapController: UIViewController, MKMapViewDelegate, CLLocationManagerDeleg
         longPressGesture.delegate = self
         longPressGesture.minimumPressDuration = 0.5 //user must press for 0.5 seconds
         mapView.addGestureRecognizer(longPressGesture)
-
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if (!locations.isEmpty) {
             let myLocation = locations.last
             self.currentLocation = myLocation
-            print("Got my location")
         }
     }
     
@@ -73,6 +71,12 @@ class MapController: UIViewController, MKMapViewDelegate, CLLocationManagerDeleg
         centerMapOnLocation(initialLocation)
     }
     
+//    //delegate methods for the Search functionality
+//    func plotSearchedLocation(viewController: ViewController) {
+//        addAnnotationAtCoordinate(coordinate, title: title)
+//        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+//        centerMapOnLocation(location)
+//    }
     
     func addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2D, title: String) {
         let annotation = MKPointAnnotation()

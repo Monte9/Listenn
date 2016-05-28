@@ -21,6 +21,8 @@
 		FA938B2D1CD84E5B00CD5E92 /* ListennTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA938B2C1CD84E5B00CD5E92 /* ListennTests.swift */; };
 		FA938B381CD84E5B00CD5E92 /* ListennUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA938B371CD84E5B00CD5E92 /* ListennUITests.swift */; };
 		FAA2F2771CD8E41300F12C4B /* WikiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA2F2761CD8E41300F12C4B /* WikiManager.swift */; };
+		FABE61FA1CFA2FBB000C05A7 /* SVGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE61F71CFA2FBB000C05A7 /* SVGeocoder.m */; };
+		FABE61FB1CFA2FBB000C05A7 /* SVPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE61F91CFA2FBB000C05A7 /* SVPlacemark.m */; };
 		FAC0A74D1CD9E6CB00D33410 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC0A74C1CD9E6CB00D33410 /* ArticleCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,11 @@
 		FA938B371CD84E5B00CD5E92 /* ListennUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListennUITests.swift; sourceTree = "<group>"; };
 		FA938B391CD84E5B00CD5E92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAA2F2761CD8E41300F12C4B /* WikiManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WikiManager.swift; sourceTree = "<group>"; };
+		FABE61F51CFA2FBA000C05A7 /* Listenn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Listenn-Bridging-Header.h"; sourceTree = "<group>"; };
+		FABE61F61CFA2FBB000C05A7 /* SVGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGeocoder.h; sourceTree = "<group>"; };
+		FABE61F71CFA2FBB000C05A7 /* SVGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGeocoder.m; sourceTree = "<group>"; };
+		FABE61F81CFA2FBB000C05A7 /* SVPlacemark.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVPlacemark.h; sourceTree = "<group>"; };
+		FABE61F91CFA2FBB000C05A7 /* SVPlacemark.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVPlacemark.m; sourceTree = "<group>"; };
 		FAC0A74C1CD9E6CB00D33410 /* ArticleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -155,6 +162,7 @@
 		FA938B161CD84E5B00CD5E92 /* Listenn */ = {
 			isa = PBXGroup;
 			children = (
+				FABE61F41CFA2FA3000C05A7 /* Supporting Files */,
 				FA938B171CD84E5B00CD5E92 /* AppDelegate.swift */,
 				FA938B1B1CD84E5B00CD5E92 /* Main.storyboard */,
 				FA7CE0ED1CD8DE50001F4268 /* View Controllers */,
@@ -183,6 +191,18 @@
 				FA938B391CD84E5B00CD5E92 /* Info.plist */,
 			);
 			path = ListennUITests;
+			sourceTree = "<group>";
+		};
+		FABE61F41CFA2FA3000C05A7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FABE61F61CFA2FBB000C05A7 /* SVGeocoder.h */,
+				FABE61F71CFA2FBB000C05A7 /* SVGeocoder.m */,
+				FABE61F81CFA2FBB000C05A7 /* SVPlacemark.h */,
+				FABE61F91CFA2FBB000C05A7 /* SVPlacemark.m */,
+				FABE61F51CFA2FBA000C05A7 /* Listenn-Bridging-Header.h */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		FAC0A74B1CD9E6AD00D33410 /* Views */ = {
@@ -379,7 +399,9 @@
 				FA7CE0EB1CD8DC1A001F4268 /* MapController.swift in Sources */,
 				FAA2F2771CD8E41300F12C4B /* WikiManager.swift in Sources */,
 				FA7CE0EF1CD8DF00001F4268 /* ListController.swift in Sources */,
+				FABE61FB1CFA2FBB000C05A7 /* SVPlacemark.m in Sources */,
 				FA938B1A1CD84E5B00CD5E92 /* ViewController.swift in Sources */,
+				FABE61FA1CFA2FBB000C05A7 /* SVGeocoder.m in Sources */,
 				FAC0A74D1CD9E6CB00D33410 /* ArticleCell.swift in Sources */,
 				FA6436E51CDDA7AF00484FFD /* SonarAnnotationView.swift in Sources */,
 				FA7CE0E91CD8D311001F4268 /* WikiArticle.swift in Sources */,
@@ -527,10 +549,13 @@
 			baseConfigurationReference = 19590A08CB9695B9D5C3B729 /* Pods-Listenn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Listenn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.montethakkar.Listenn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Listenn/Listenn-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -539,10 +564,12 @@
 			baseConfigurationReference = 85929B717D0872683508A405 /* Pods-Listenn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Listenn/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.montethakkar.Listenn;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Listenn/Listenn-Bridging-Header.h";
 			};
 			name = Release;
 		};
