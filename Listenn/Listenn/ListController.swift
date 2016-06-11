@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import QuartzCore
 import AVFoundation
+import CoreLocation
 
-class ListController: UIViewController, UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate {
+class ListController: UIViewController, UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate, ViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -28,23 +28,18 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        if !loadSettings() {
-            registerDefaultSettings()
-        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(false)
         
-        //get articles from current location
-        wikiManager.requestResource(
-            37.8199, longitude: -122.4783) { (gotEmArticles) in
-                self.queriedArticles = gotEmArticles
-                self.tableView.reloadData()
+        //Table view delegate
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        //Text-to-Speech settings
+        if !loadSettings() {
+            registerDefaultSettings()
         }
     }
     
@@ -67,6 +62,20 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell.setSelected(false, animated: true)
         
         return cell
+    }
+    
+    //Called from view controller initally
+    func listArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double) {
+        let viewController = storyboard!.instantiateViewControllerWithIdentifier("ViewController") as! ViewController
+        viewController.delegate = self
+
+        print("OMG OMG.. is this working? (list)")
+        //get articles from current location
+        wikiManager.requestResource(
+        latitude, longitude: longitude) { (gotEmArticles) in
+            self.queriedArticles = gotEmArticles
+            self.tableView.reloadData()
+        }
     }
 
     //delegate methods for the Article Cell

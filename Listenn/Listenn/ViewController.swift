@@ -10,9 +10,17 @@ import UIKit
 
 let kWikilocationBaseURL = "https://en.wikipedia.org"
 
-class ViewController: UIViewController, UISearchBarDelegate {
+@objc protocol ViewControllerDelegate: class {
+    optional func mapArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double)
+    optional func listArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double)
+}
+
+class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDelegate {
 
     @IBOutlet weak var mainView: UIView!
+    
+    //property to hold a reference to the delegate listener
+    weak var delegate: ViewControllerDelegate?
     
     //container views for map and list
     @IBOutlet weak var mapContainerView: UIView!
@@ -42,6 +50,16 @@ class ViewController: UIViewController, UISearchBarDelegate {
         navigationItem.title = "Listnn"
         navigationController?.navigationBar.barTintColor = UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
+        //LocationService delegate
+        LocationService.sharedInstance.delegate = self
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(false)
+        
+        //Get user current location
+        LocationService.sharedInstance.startUpdatingLocation()
     }
     
     //Used when the search button clicked to search
@@ -96,6 +114,22 @@ class ViewController: UIViewController, UISearchBarDelegate {
                 let coordinates = CLLocationCoordinate2D(latitude: each.coordinate.latitude, longitude: each.coordinate.longitude)
             }
         }
+    }
+    
+    // MARK: LocationService Delegate
+    func tracingLocation(currentLocation: CLLocation) {
+        print("Calling the delegate method for mapView articles.")
+        delegate?.mapArticlesFromCurrentLocation!(self, latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
+        
+        print("Calling the delegate method for listView articles..")
+        delegate?.listArticlesFromCurrentLocation!(self, latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
+        
+        //Stop updating user current location
+        LocationService.sharedInstance.stopUpdatingLocation()
+    }
+    
+    func tracingLocationDidFailWithError(error: NSError) {
+        print("tracing Location Error : \(error.description)")
     }
     
     //used to toggle between map and list view (segmented controller)

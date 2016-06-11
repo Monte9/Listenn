@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18CB96233EAA62AE7E5B4618 /* Pods_Listenn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D18B52560359272E54FC7E82 /* Pods_Listenn.framework */; };
+		FA43D3951D0CB4C100551240 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43D3941D0CB4C100551240 /* LocationService.swift */; };
 		FA6436E31CDDA7A200484FFD /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6436E21CDDA7A200484FFD /* Annotation.swift */; };
 		FA6436E51CDDA7AF00484FFD /* SonarAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6436E41CDDA7AF00484FFD /* SonarAnnotationView.swift */; };
 		FA7CE0E91CD8D311001F4268 /* WikiArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7CE0E81CD8D311001F4268 /* WikiArticle.swift */; };
@@ -47,6 +48,7 @@
 		19590A08CB9695B9D5C3B729 /* Pods-Listenn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listenn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Listenn/Pods-Listenn.debug.xcconfig"; sourceTree = "<group>"; };
 		85929B717D0872683508A405 /* Pods-Listenn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listenn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Listenn/Pods-Listenn.release.xcconfig"; sourceTree = "<group>"; };
 		D18B52560359272E54FC7E82 /* Pods_Listenn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Listenn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA43D3941D0CB4C100551240 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		FA6436E21CDDA7A200484FFD /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		FA6436E41CDDA7AF00484FFD /* SonarAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonarAnnotationView.swift; sourceTree = "<group>"; };
 		FA7CE0E81CD8D311001F4268 /* WikiArticle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WikiArticle.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 		FABE61F41CFA2FA3000C05A7 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FA43D3941D0CB4C100551240 /* LocationService.swift */,
 				FABE61F61CFA2FBB000C05A7 /* SVGeocoder.h */,
 				FABE61F71CFA2FBB000C05A7 /* SVGeocoder.m */,
 				FABE61F81CFA2FBB000C05A7 /* SVPlacemark.h */,
@@ -414,6 +417,7 @@
 				FA6436E51CDDA7AF00484FFD /* SonarAnnotationView.swift in Sources */,
 				FA7CE0E91CD8D311001F4268 /* WikiArticle.swift in Sources */,
 				FA6436E31CDDA7A200484FFD /* Annotation.swift in Sources */,
+				FA43D3951D0CB4C100551240 /* LocationService.swift in Sources */,
 				FA938B181CD84E5B00CD5E92 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
