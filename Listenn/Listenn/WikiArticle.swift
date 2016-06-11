@@ -45,11 +45,11 @@ public class WikiArticle : NSObject {
 //        return self.title.hash
 //    }
     
-    override public func isEqual(object: AnyObject!) -> Bool {
-        if self === object ||
-            self.hash == object.hash {
-                return true
-        }
-        return false
-    }
+//    override public func isEqual(object: AnyObject!) -> Bool {
+//        if self === object ||
+//            self.hash == object.hash {
+//                return true
+//        }
+//        return false
+//    }
 }

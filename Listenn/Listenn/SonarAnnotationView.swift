@@ -12,7 +12,6 @@ import MapKit
 class SonarAnnotationView: MKAnnotationView {
     
     // MARK: - Types
-    
     struct Constants {
         struct ColorPalette {
             static let green = UIColor(red:222/255, green:53/255, blue:46/255, alpha:1.0)
@@ -20,7 +19,6 @@ class SonarAnnotationView: MKAnnotationView {
     }
     
     // MARK: - Initializers
-    
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         startAnimation()
@@ -31,12 +29,16 @@ class SonarAnnotationView: MKAnnotationView {
     }
     
     // MARK: - NSCoding
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     // MARK: - Convenience
+    func startAnimation() {
+        sonar(CACurrentMediaTime())
+        sonar(CACurrentMediaTime() + 0.92)
+        sonar(CACurrentMediaTime() + 1.84)
+    }
     
     func sonar(beginTime: CFTimeInterval) {
         // The circle in its smallest size.
@@ -49,6 +51,7 @@ class SonarAnnotationView: MKAnnotationView {
         let shapeLayer = CAShapeLayer()
         shapeLayer.strokeColor = Constants.ColorPalette.green.CGColor
         shapeLayer.fillColor = Constants.ColorPalette.green.CGColor
+        
         // This is the path that's visible when there'd be no animation.
         shapeLayer.path = circlePath1.CGPath
         self.layer.addSublayer(shapeLayer)
@@ -77,11 +80,4 @@ class SonarAnnotationView: MKAnnotationView {
         // Add the animation to the layer.
         shapeLayer.addAnimation(animationGroup, forKey: "sonar")
     }
-    
-    func startAnimation() {
-        sonar(CACurrentMediaTime())
-        sonar(CACurrentMediaTime() + 0.92)
-        sonar(CACurrentMediaTime() + 1.84)
-    }
-    
 }

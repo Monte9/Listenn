@@ -55,36 +55,6 @@ class MapController: UIViewController, MKMapViewDelegate, CLLocationManagerDeleg
         mapView.addGestureRecognizer(longPressGesture)
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if (!locations.isEmpty) {
-            let myLocation = locations.last
-            self.currentLocation = myLocation
-        }
-    }
-    
-    @IBAction func goToMyLocationButton(sender: AnyObject) {
-        locationManager.startUpdatingLocation()
-        print("Got'em")
-        
-        // Set initial location for map view.
-        let initialLocation = CLLocation(latitude: (currentLocation?.coordinate.latitude)!, longitude: (currentLocation?.coordinate.longitude)!)
-        centerMapOnLocation(initialLocation)
-    }
-    
-//    //delegate methods for the Search functionality
-//    func plotSearchedLocation(viewController: ViewController) {
-//        addAnnotationAtCoordinate(coordinate, title: title)
-//        let location = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
-//        centerMapOnLocation(location)
-//    }
-    
-    func addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2D, title: String) {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        annotation.title = title
-        mapView.addAnnotation(annotation)
-    }
-    
     func handleGesture(sender: UILongPressGestureRecognizer) {
         if sender.state == .Ended {
             let touchPoint: CGPoint = sender.locationInView(mapView)
@@ -93,32 +63,56 @@ class MapController: UIViewController, MKMapViewDelegate, CLLocationManagerDeleg
             pointAnn.coordinate = touchMapCoordinate
             self.addAnnotationAtCoordinate(touchMapCoordinate, title: "Dropped Pin")
             locationManager.stopUpdatingLocation()
-            print("Stop updating current location")
             
+            //remove previous annotations
             let annotationsToRemove = self.mapView.annotations.filter { $0 !== self.mapView.userLocation }
             self.mapView.removeAnnotations( annotationsToRemove )
             
+            //request wikipedia articles with touch coordinates
             wikiManager.requestResource(touchMapCoordinate.latitude, longitude: touchMapCoordinate.longitude, completion: { (gotArticles) in
                 self.queriedArticles = gotArticles
                 
+                //if no articles found show alert message
                 if (self.queriedArticles?.count == 0) {
                     let alertController = UIAlertController(title: "No landmarks found!", message: "Please try a different location.", preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alertController, animated: false, completion: nil)
-                }
-                
-                for article in self.queriedArticles! {
-                    let pinLocation = CLLocationCoordinate2DMake(article.latitutde , article.longitude )
-                    self.addAnnotationAtCoordinate(pinLocation, title: article.title)
+                } else {
+                    //if articles found then annotated them on map
+                    for article in self.queriedArticles! {
+                        let pinLocation = CLLocationCoordinate2DMake(article.latitutde , article.longitude )
+                        self.addAnnotationAtCoordinate(pinLocation, title: article.title)
+                    }
                 }
             })
         }
-        
+    }
+    
+    //maintains current user location
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if (!locations.isEmpty) {
+            let myLocation = locations.last
+            self.currentLocation = myLocation
+        }
+    }
+    
+    //center map on user location
+    @IBAction func goToMyLocationButton(sender: AnyObject) {
+        locationManager.startUpdatingLocation()
+        // Set initial location for map view.
+        let initialLocation = CLLocation(latitude: (currentLocation?.coordinate.latitude)!, longitude: (currentLocation?.coordinate.longitude)!)
+        centerMapOnLocation(initialLocation)
+    }
+    
+    func addAnnotationAtCoordinate(coordinate: CLLocationCoordinate2D, title: String) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinate
+        annotation.title = title
+        mapView.addAnnotation(annotation)
     }
     
     // MARK: - MKMapViewDelegate
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        
         if annotation is MKUserLocation {
             return nil
         }
@@ -127,25 +121,21 @@ class MapController: UIViewController, MKMapViewDelegate, CLLocationManagerDeleg
         var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(Constants.MapViewIdentifiers.sonarAnnotationView)
         
         if annotationView == nil {
-            annotationView = SonarAnnotationView(annotation: annotation, reuseIdentifier: Constants.MapViewIdentifiers.sonarAnnotationView)
+            annotationView = SonarAnnotationView(annotation: annotation, reuseIdentifier:Constants.MapViewIdentifiers.sonarAnnotationView)
         } else {
             annotationView!.annotation = annotation
         }
-        
         return annotationView
     }
     
     // MARK: - Convenience
-    
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
         mapView.setRegion(coordinateRegion, animated: false)
     }
     
     // MARK: - Status Bar
-    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
-
 }

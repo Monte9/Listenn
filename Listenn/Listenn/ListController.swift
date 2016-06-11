@@ -26,7 +26,6 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
     var pitch: Float!
     var volume: Float!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,6 +40,7 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(false)
         
+        //get articles from current location
         wikiManager.requestResource(
             37.8199, longitude: -122.4783) { (gotEmArticles) in
                 self.queriedArticles = gotEmArticles
@@ -48,6 +48,7 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    // MARK: - Table View Delegate methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return queriedArticles?.count ?? 0
     }
@@ -78,6 +79,7 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         speechSynthesizer.speakUtterance(speechUtterance)
     }
     
+    //Text-to-Speech default settings
     func registerDefaultSettings() {
         rate = AVSpeechUtteranceDefaultSpeechRate
         pitch = 1.0
@@ -87,6 +89,7 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         NSUserDefaults.standardUserDefaults().registerDefaults(defaultSpeechSettings)
     }
     
+    //load Text-to-Speech default settings
     func loadSettings() -> Bool {
         let userDefaults = NSUserDefaults.standardUserDefaults()
         if let theRate: Float = userDefaults.valueForKey("rate") as? Float {
@@ -98,13 +101,11 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         return false
     }
     
+    //show wikipedia article using url
     func getInfoButtonClicked (articleCell: ArticleCell!) {
         let index = tableView.indexPathForCell(articleCell)
-        
-        print(index)
         let infoUrl = queriedArticles![(index?.row)!].url
         
         UIApplication.sharedApplication().openURL(infoUrl)
     }
-
 }

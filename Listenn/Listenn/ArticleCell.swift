@@ -8,6 +8,7 @@
 
 import UIKit
 
+//delegate methods for ArticleCell
 protocol ArticleCellDelegate: class {
     func playSoundButtonClicked (articleCell: ArticleCell!)
     func getInfoButtonClicked (articleCell: ArticleCell!)
@@ -22,14 +23,6 @@ class ArticleCell: UITableViewCell {
     
     var buttonDelegate: ArticleCellDelegate?
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-    
     @IBAction func playSoundButtonClicked(sender: AnyObject) {
         print("Play sound button clicked")
         buttonDelegate?.playSoundButtonClicked(self)
@@ -38,5 +31,13 @@ class ArticleCell: UITableViewCell {
     @IBAction func getInfoButtonClicked(sender: AnyObject) {
         print("Get info button clicked")
         buttonDelegate?.getInfoButtonClicked(self)
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
     }
 }

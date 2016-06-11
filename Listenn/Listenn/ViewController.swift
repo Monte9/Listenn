@@ -13,9 +13,9 @@ let kWikilocationBaseURL = "https://en.wikipedia.org"
 class ViewController: UIViewController, UISearchBarDelegate {
 
     @IBOutlet weak var mainView: UIView!
+    
     //container views for map and list
     @IBOutlet weak var mapContainerView: UIView!
-    
     @IBOutlet weak var listContainerView: UIView!
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -44,6 +44,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
     
+    //Used when the search button clicked to search
     @IBAction func searchButtonClicked(sender: AnyObject) {
         searchBarDisplay = !searchBarDisplay
         
@@ -51,35 +52,42 @@ class ViewController: UIViewController, UISearchBarDelegate {
             //Hide the search bar
             navigationItem.titleView = nil
             navigationItem.title = "Listnn"
+            
             //Get the search text and make the search field empty
             searchedText = searchBar.text
             if searchedText != "" {
                 searchBar.text = ""
-                print("Entered search location: \(searchedText)")
-                print("Perform segue/ reload the view here")
+                print("\nEntered search location: \(searchedText!)")
+                print("Searched using search button \n")
+                searchWithLocation(searchedText!)
             }
         } else {
             navigationItem.titleView = searchBar
         }
     }
     
+    //Used when enter key pressed on search bar
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBarDisplay = !searchBarDisplay
+        
         //Hide the search bar
         navigationItem.titleView = nil
         navigationItem.title = "Listnn"
+        
         //Get the search text and make the search field empty
         searchedText = searchBar.text
         if searchedText != "" {
             searchBar.text = ""
-            print("Entered search location: \(searchedText)")
+            print("\nEntered search location: \(searchedText!)")
+            print("Searched using enter key on search bar \n")
             searchWithLocation(searchedText!)
         }
     }
     
+    //Gets the coordinates of the searched location
     func searchWithLocation(location: String) {
-        print("User the GeoCoding API to get the latitude and longitude of the location entered which is \(location)")
+        print("Using the GeoCoding API to get the latitude and longitude of the search location which is: \(location)")
         SVGeocoder.geocode(location) { (placemarks: [AnyObject]!, urlResponse: NSHTTPURLResponse!, error: NSError!) in
             
             for each in placemarks {
@@ -90,6 +98,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    //used to toggle between map and list view (segmented controller)
     @IBAction func indexChanged(sender: AnyObject) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
@@ -103,6 +112,7 @@ class ViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    //implement settings view
     @IBAction func appSettings(sender: AnyObject) {
         print("Implement settings here")
     }
