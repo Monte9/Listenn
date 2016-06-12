@@ -10,6 +10,12 @@ import UIKit
 import AVFoundation
 import CoreLocation
 
+//Store state of the speech Uterrance for pause/play functionality
+struct TextToSpeech {
+    static var pausing: Bool? = false
+    static var previousIndex: NSIndexPath = NSIndexPath()
+}
+
 class ListController: UIViewController, UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate, ViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
@@ -63,7 +69,7 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
       func listArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double) {
-        //request wikipedia articles with touch coordinates
+        //request wikipedia articles from user location
         wikiManager.requestResource(latitude, longitude: longitude, completion: { (gotArticles) in
             Articles.queriedArticles = gotArticles
             self.tableView.reloadData()
@@ -72,12 +78,27 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //delegate methods for the Article Cell
     func playSoundButtonClicked (articleCell: ArticleCell!) {
-        let speechUtterance = AVSpeechUtterance(string: articleCell.titleLabel.text!)
+        let index = tableView.indexPathForCell(articleCell)
+        let text = "Landmark. " + Articles.queriedArticles![(index?.row)!].title + ". Introduction. " + Articles.queriedArticles![(index?.row)!].intro
+
+        let speechUtterance = AVSpeechUtterance(string: text)
         speechUtterance.rate = rate
         speechUtterance.pitchMultiplier = pitch
         speechUtterance.volume = volume
         
-        speechSynthesizer.speakUtterance(speechUtterance)
+        //settings for Play/Pause feature of sound
+        if (index != TextToSpeech.previousIndex) {
+            speechSynthesizer.stopSpeakingAtBoundary(AVSpeechBoundary.Immediate)
+            speechSynthesizer.speakUtterance(speechUtterance)
+            TextToSpeech.pausing = false
+            TextToSpeech.previousIndex = index!
+        } else if (index == TextToSpeech.previousIndex && TextToSpeech.pausing == false){
+            TextToSpeech.pausing = !TextToSpeech.pausing!
+            speechSynthesizer.pauseSpeakingAtBoundary(AVSpeechBoundary.Word)
+        } else if (index == TextToSpeech.previousIndex && TextToSpeech.pausing == true){
+            TextToSpeech.pausing = !TextToSpeech.pausing!
+            speechSynthesizer.continueSpeaking()
+        }
     }
     
     //Text-to-Speech default settings

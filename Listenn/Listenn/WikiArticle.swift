@@ -17,6 +17,7 @@ public class WikiArticle : NSObject {
     public var longitude:Double!
     public var url:NSURL!
     public var title:String!
+    public var intro:String!
     
     //MARK: - Init
     init(json:Dictionary<String,AnyObject>) {
@@ -25,6 +26,7 @@ public class WikiArticle : NSObject {
         if let title = json["title"] as? NSString {
             self.title = title as String
         }
+        
         if let distance = json["dist"] as? NSNumber {
             self.distance = NSString(format: "Distance: %.2f Meter", distance.doubleValue) as String
         }
@@ -38,6 +40,11 @@ public class WikiArticle : NSObject {
             self.longitude = longitude.doubleValue
         }
         self.url = NSURL(string: "http://en.wikipedia.org/wiki?curid=\(self.identifier)")
+    }
+    
+    //add intro of the article 
+    func addIntro (intro: String) {
+        self.intro = intro
     }
     
 //    //MARK: - Equality
