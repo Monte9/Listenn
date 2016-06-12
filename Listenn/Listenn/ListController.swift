@@ -67,7 +67,6 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         wikiManager.requestResource(latitude, longitude: longitude, completion: { (gotArticles) in
             Articles.queriedArticles = gotArticles
             self.tableView.reloadData()
-            print("here?")
         })
     }
     

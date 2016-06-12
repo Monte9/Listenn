@@ -10,11 +10,6 @@ import UIKit
 import MapKit
 import CoreLocation
 
-// store wiki articles - GLOBAL VARIABLE
-struct Articles {
-    static var queriedArticles: [WikiArticle]?
-}
-
 class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, ViewControllerDelegate {
     
     // MARK: - Types
@@ -23,17 +18,6 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
             static let sonarAnnotationView = "sonarAnnotationView"
         }
     }
-    
-//    //store wiki articles
-//    class Articles {
-//        struct Static {
-//            static var queriedArticles = [WikiArticle]()
-//        }
-//        class var queriedArticles: [WikiArticle] {
-//            get { return Static.queriedArticles }
-//            set { Static.queriedArticles = newValue }
-//        }
-//    }
     
     // MARK: - Properties
     @IBOutlet weak var mapView: MKMapView!

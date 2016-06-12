@@ -33,7 +33,6 @@ class WikiManager: NSObject {
                         }
                     }
                 }
-                print("returning articles: \(articles.count)")
                 completion(articles.array as! [WikiArticle])
         }
     }

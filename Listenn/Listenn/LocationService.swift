@@ -10,8 +10,8 @@ import Foundation
 import CoreLocation
 
 protocol LocationServiceDelegate {
-    func tracingLocation(currentLocation: CLLocation)
-    func tracingLocationDidFailWithError(error: NSError)
+    func trackingLocation(currentLocation: CLLocation)
+    func trackingLocationDidFailWithError(error: NSError)
 }
 
 class LocationService: NSObject, CLLocationManagerDelegate {
@@ -89,7 +89,7 @@ class LocationService: NSObject, CLLocationManagerDelegate {
             return
         }
         
-        delegate.tracingLocation(currentLocation)
+        delegate.trackingLocation(currentLocation)
     }
     
     private func updateLocationDidFailWithError(error: NSError) {
@@ -98,6 +98,6 @@ class LocationService: NSObject, CLLocationManagerDelegate {
             return
         }
         
-        delegate.tracingLocationDidFailWithError(error)
+        delegate.trackingLocationDidFailWithError(error)
     }
 }
