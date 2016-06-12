@@ -10,9 +10,23 @@ import UIKit
 
 let kWikilocationBaseURL = "https://en.wikipedia.org"
 
-class ViewController: UIViewController, UISearchBarDelegate {
+// store wiki articles - GLOBAL VARIABLE
+struct Articles {
+    static var queriedArticles: [WikiArticle]?
+}
+
+@objc protocol ViewControllerDelegate: class {
+    optional func mapArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double)
+    optional func listArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double)
+}
+
+class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDelegate {
 
     @IBOutlet weak var mainView: UIView!
+    
+    //hold references for mapView and listView delegate methods
+    weak var mapDelegate: ViewControllerDelegate?
+    weak var listDelegate: ViewControllerDelegate?
     
     //container views for map and list
     @IBOutlet weak var mapContainerView: UIView!
@@ -42,6 +56,30 @@ class ViewController: UIViewController, UISearchBarDelegate {
         navigationItem.title = "Listnn"
         navigationController?.navigationBar.barTintColor = UIColor(red: 231/255, green: 76/255, blue: 60/255, alpha: 1)
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
+        //LocationService delegate
+        LocationService.sharedInstance.delegate = self
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(false)
+        
+        //Start updating user location
+        LocationService.sharedInstance.startUpdatingLocation()
+    }
+    
+    // MARK: LocationService Delegate
+    func trackingLocation(currentLocation: CLLocation) {
+        mapDelegate?.mapArticlesFromCurrentLocation!(self, latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
+        listDelegate?.listArticlesFromCurrentLocation!(self, latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
+        
+        //Stop updating user location
+        LocationService.sharedInstance.stopUpdatingLocation()
+    }
+    
+    // MARK: LocationService Delegate
+    func trackingLocationDidFailWithError(error: NSError) {
+        print("tracing Location Error : \(error.description)")
     }
     
     //Used when the search button clicked to search
@@ -115,6 +153,18 @@ class ViewController: UIViewController, UISearchBarDelegate {
     //implement settings view
     @IBAction func appSettings(sender: AnyObject) {
         print("Implement settings here")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let identifier = segue.identifier {
+            if identifier == "MapViewSegue" {
+                let mapController = segue.destinationViewController as! MapController
+                mapDelegate = mapController
+            } else if identifier == "ListViewSegue" {
+                let listController = segue.destinationViewController as! ListController
+                listDelegate = listController
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {

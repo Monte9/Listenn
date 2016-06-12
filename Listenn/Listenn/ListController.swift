@@ -7,18 +7,15 @@
 //
 
 import UIKit
-import QuartzCore
 import AVFoundation
+import CoreLocation
 
-class ListController: UIViewController, UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate {
+class ListController: UIViewController, UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate, ViewControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     //instance of the wikimanager to make request to the API
     let wikiManager = WikiManager();
-    
-    // store wiki articles
-    var queriedArticles: [WikiArticle]?
     
     // text-to-speech code
     let speechSynthesizer = AVSpeechSynthesizer()
@@ -26,31 +23,27 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
     var pitch: Float!
     var volume: Float!
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        if !loadSettings() {
-            registerDefaultSettings()
-        }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(false)
         
-        //get articles from current location
-        wikiManager.requestResource(
-            37.8199, longitude: -122.4783) { (gotEmArticles) in
-                self.queriedArticles = gotEmArticles
-                self.tableView.reloadData()
+        //Table view delegate
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        //Text-to-Speech settings
+        if !loadSettings() {
+            registerDefaultSettings()
         }
     }
     
     // MARK: - Table View Delegate methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return queriedArticles?.count ?? 0
+        return Articles.queriedArticles?.count ?? 0
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -62,13 +55,21 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         cell.buttonDelegate = self
         
-        cell.titleLabel.text = queriedArticles![indexPath.row].title
-        cell.distanceLabel.text = queriedArticles![indexPath.row].distance
+        cell.titleLabel.text = Articles.queriedArticles![indexPath.row].title
+        cell.distanceLabel.text = Articles.queriedArticles![indexPath.row].distance
         cell.setSelected(false, animated: true)
         
         return cell
     }
-
+    
+      func listArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double) {
+        //request wikipedia articles with touch coordinates
+        wikiManager.requestResource(latitude, longitude: longitude, completion: { (gotArticles) in
+            Articles.queriedArticles = gotArticles
+            self.tableView.reloadData()
+        })
+    }
+    
     //delegate methods for the Article Cell
     func playSoundButtonClicked (articleCell: ArticleCell!) {
         let speechUtterance = AVSpeechUtterance(string: articleCell.titleLabel.text!)
@@ -104,7 +105,7 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
     //show wikipedia article using url
     func getInfoButtonClicked (articleCell: ArticleCell!) {
         let index = tableView.indexPathForCell(articleCell)
-        let infoUrl = queriedArticles![(index?.row)!].url
+        let infoUrl = Articles.queriedArticles![(index?.row)!].url
         
         UIApplication.sharedApplication().openURL(infoUrl)
     }
