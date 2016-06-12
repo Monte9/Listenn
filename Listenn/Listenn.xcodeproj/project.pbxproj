@@ -122,8 +122,8 @@
 		FA43D3911D0CAFA000551240 /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				FA938B201CD84E5B00CD5E92 /* LaunchScreen.storyboard */,
 				FA938B1B1CD84E5B00CD5E92 /* Main.storyboard */,
+				FA938B201CD84E5B00CD5E92 /* LaunchScreen.storyboard */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";

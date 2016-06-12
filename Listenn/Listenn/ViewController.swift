@@ -15,12 +15,27 @@ let kWikilocationBaseURL = "https://en.wikipedia.org"
     optional func listArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double)
 }
 
+extension UIView {
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.nextResponder()
+            if let viewController = parentResponder as? UIViewController {
+                return viewController
+            }
+        }
+        return nil
+    }
+}
+
 class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDelegate {
 
     @IBOutlet weak var mainView: UIView!
     
     //property to hold a reference to the delegate listener
-    weak var delegate: ViewControllerDelegate?
+    weak var mapDelegate: ViewControllerDelegate?
+    
+    weak var listDelegate: ViewControllerDelegate?
     
     //container views for map and list
     @IBOutlet weak var mapContainerView: UIView!
@@ -118,14 +133,10 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
     
     // MARK: LocationService Delegate
     func tracingLocation(currentLocation: CLLocation) {
-        print("Calling the delegate method for mapView articles.")
-        delegate?.mapArticlesFromCurrentLocation!(self, latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
-        
-        print("Calling the delegate method for listView articles..")
-        delegate?.listArticlesFromCurrentLocation!(self, latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
-        
+        mapDelegate?.mapArticlesFromCurrentLocation!(self, latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
+        listDelegate?.listArticlesFromCurrentLocation!(self, latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
         //Stop updating user current location
-        LocationService.sharedInstance.stopUpdatingLocation()
+        //LocationService.sharedInstance.stopUpdatingLocation()
     }
     
     func tracingLocationDidFailWithError(error: NSError) {
@@ -138,9 +149,13 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
         case 0:
             mapContainerView.alpha = 1.0
             listContainerView.alpha = 0.0
+            //Get user current location
+            LocationService.sharedInstance.startUpdatingLocation()
         case 1:
             mapContainerView.alpha = 0.0
             listContainerView.alpha = 1.0
+            //Get user current location
+            LocationService.sharedInstance.startUpdatingLocation()
         default:
             break;
         }
@@ -149,6 +164,20 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
     //implement settings view
     @IBAction func appSettings(sender: AnyObject) {
         print("Implement settings here")
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if let identifier = segue.identifier {
+            if identifier == "MapViewSegue" {
+                let mapController = segue.destinationViewController as! MapController
+                mapDelegate = mapController
+                print("Map view")
+            } else if identifier == "ListViewSegue" {
+                let listController = segue.destinationViewController as! ListController
+                listDelegate = listController
+                print("List view")
+            }
+        }
     }
     
     override func didReceiveMemoryWarning() {

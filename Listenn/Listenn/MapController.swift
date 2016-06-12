@@ -10,6 +10,11 @@ import UIKit
 import MapKit
 import CoreLocation
 
+// store wiki articles - GLOBAL VARIABLE
+struct Articles {
+    static var queriedArticles: [WikiArticle]?
+}
+
 class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDelegate, ViewControllerDelegate {
     
     // MARK: - Types
@@ -19,6 +24,17 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         }
     }
     
+//    //store wiki articles
+//    class Articles {
+//        struct Static {
+//            static var queriedArticles = [WikiArticle]()
+//        }
+//        class var queriedArticles: [WikiArticle] {
+//            get { return Static.queriedArticles }
+//            set { Static.queriedArticles = newValue }
+//        }
+//    }
+    
     // MARK: - Properties
     @IBOutlet weak var mapView: MKMapView!
     
@@ -27,9 +43,6 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
     
     //instance of the wikimanager to make request to the API
     let wikiManager = WikiManager();
-    
-    // store wiki articles
-    var queriedArticles: [WikiArticle]?
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -64,16 +77,16 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
             
             //request wikipedia articles with touch coordinates
             wikiManager.requestResource(touchMapCoordinate.latitude, longitude: touchMapCoordinate.longitude, completion: { (gotArticles) in
-                self.queriedArticles = gotArticles
+                Articles.queriedArticles = gotArticles
                 
                 //if no articles found show alert message
-                if (self.queriedArticles?.count == 0) {
+                if (Articles.queriedArticles?.count == 0) {
                     let alertController = UIAlertController(title: "No landmarks found!", message: "Please try a different location.", preferredStyle: UIAlertControllerStyle.Alert)
                     alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alertController, animated: false, completion: nil)
                 } else {
                     //if articles found then annotated them on map
-                    for article in self.queriedArticles! {
+                    for article in Articles.queriedArticles! {
                         let pinLocation = CLLocationCoordinate2DMake(article.latitutde , article.longitude )
                         self.addAnnotationAtCoordinate(pinLocation, title: article.title)
                     }
@@ -84,22 +97,23 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
     
     //Called from view controller initally
     func mapArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double) {
-        let viewController = storyboard!.instantiateViewControllerWithIdentifier("ViewController") as! ViewController
-        viewController.delegate = self
         
-        print("OMG OMG.. is this working? (Map)")
+        //remove previous annotations
+        let annotationsToRemove = self.mapView.annotations.filter { $0 !== self.mapView.userLocation }
+        self.mapView.removeAnnotations( annotationsToRemove )
+        
         //request wikipedia articles with touch coordinates
         wikiManager.requestResource(latitude, longitude: longitude, completion: { (gotArticles) in
-            self.queriedArticles = gotArticles
+            Articles.queriedArticles = gotArticles
             
             //if no articles found show alert message
-            if (self.queriedArticles?.count == 0) {
+            if (Articles.queriedArticles?.count == 0) {
                 let alertController = UIAlertController(title: "No landmarks found!", message: "Please try a different location.", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alertController, animated: false, completion: nil)
             } else {
                 //if articles found then annotated them on map
-                for article in self.queriedArticles! {
+                for article in Articles.queriedArticles! {
                     let pinLocation = CLLocationCoordinate2DMake(article.latitutde , article.longitude )
                     self.addAnnotationAtCoordinate(pinLocation, title: article.title)
                 }
@@ -109,7 +123,6 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
     
     //center map on user location
     @IBAction func goToMyLocationButton(sender: AnyObject) {
-        LocationService.sharedInstance.stopUpdatingLocation()
         // Set initial location for map view.
         let initialLocation = CLLocation(latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)!, longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
         centerMapOnLocation(initialLocation)

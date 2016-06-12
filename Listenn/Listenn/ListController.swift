@@ -17,15 +17,13 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
     //instance of the wikimanager to make request to the API
     let wikiManager = WikiManager();
     
-    // store wiki articles
-    var queriedArticles: [WikiArticle]?
-    
     // text-to-speech code
     let speechSynthesizer = AVSpeechSynthesizer()
     var rate: Float!
     var pitch: Float!
     var volume: Float!
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -45,7 +43,7 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK: - Table View Delegate methods
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return queriedArticles?.count ?? 0
+        return Articles.queriedArticles?.count ?? 0
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -57,27 +55,22 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         cell.buttonDelegate = self
         
-        cell.titleLabel.text = queriedArticles![indexPath.row].title
-        cell.distanceLabel.text = queriedArticles![indexPath.row].distance
+        cell.titleLabel.text = Articles.queriedArticles![indexPath.row].title
+        cell.distanceLabel.text = Articles.queriedArticles![indexPath.row].distance
         cell.setSelected(false, animated: true)
         
         return cell
     }
     
-    //Called from view controller initally
-    func listArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double) {
-        let viewController = storyboard!.instantiateViewControllerWithIdentifier("ViewController") as! ViewController
-        viewController.delegate = self
-
-        print("OMG OMG.. is this working? (list)")
-        //get articles from current location
-        wikiManager.requestResource(
-        latitude, longitude: longitude) { (gotEmArticles) in
-            self.queriedArticles = gotEmArticles
+      func listArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double) {
+        //request wikipedia articles with touch coordinates
+        wikiManager.requestResource(latitude, longitude: longitude, completion: { (gotArticles) in
+            Articles.queriedArticles = gotArticles
             self.tableView.reloadData()
-        }
+            print("here?")
+        })
     }
-
+    
     //delegate methods for the Article Cell
     func playSoundButtonClicked (articleCell: ArticleCell!) {
         let speechUtterance = AVSpeechUtterance(string: articleCell.titleLabel.text!)
@@ -113,7 +106,7 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
     //show wikipedia article using url
     func getInfoButtonClicked (articleCell: ArticleCell!) {
         let index = tableView.indexPathForCell(articleCell)
-        let infoUrl = queriedArticles![(index?.row)!].url
+        let infoUrl = Articles.queriedArticles![(index?.row)!].url
         
         UIApplication.sharedApplication().openURL(infoUrl)
     }
