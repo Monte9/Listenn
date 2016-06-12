@@ -24,12 +24,10 @@ class ArticleCell: UITableViewCell {
     var buttonDelegate: ArticleCellDelegate?
     
     @IBAction func playSoundButtonClicked(sender: AnyObject) {
-        print("Play sound button clicked")
         buttonDelegate?.playSoundButtonClicked(self)
     }
     
     @IBAction func getInfoButtonClicked(sender: AnyObject) {
-        print("Get info button clicked")
         buttonDelegate?.getInfoButtonClicked(self)
     }
     
