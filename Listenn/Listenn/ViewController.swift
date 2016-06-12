@@ -95,8 +95,7 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
             searchedText = searchBar.text
             if searchedText != "" {
                 searchBar.text = ""
-                print("\nEntered search location: \(searchedText!)")
-                print("Searched using search button \n")
+                print("Searched using search button")
                 searchWithLocation(searchedText!)
             }
         } else {
@@ -117,22 +116,25 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
         searchedText = searchBar.text
         if searchedText != "" {
             searchBar.text = ""
-            print("\nEntered search location: \(searchedText!)")
-            print("Searched using enter key on search bar \n")
+            print("Searched using enter key on search bar")
             searchWithLocation(searchedText!)
         }
     }
     
     //Gets the coordinates of the searched location
     func searchWithLocation(location: String) {
-        print("Using the GeoCoding API to get the latitude and longitude of the search location which is: \(location)")
+        print("Using the GeoCoding API to get the latitude and longitude of the search location: \(location)")
         SVGeocoder.geocode(location) { (placemarks: [AnyObject]!, urlResponse: NSHTTPURLResponse!, error: NSError!) in
             
-            for each in placemarks {
-                print(each.coordinate.latitude)
-                print(each.coordinate.longitude)
-                let coordinates = CLLocationCoordinate2D(latitude: each.coordinate.latitude, longitude: each.coordinate.longitude)
+            if error == nil {
+                self.mapDelegate?.mapArticlesFromCurrentLocation!(self, latitude: placemarks[0].coordinate.latitude , longitude: placemarks[0].coordinate.longitude)
+                self.listDelegate?.listArticlesFromCurrentLocation!(self, latitude: placemarks[0].coordinate.latitude , longitude: placemarks[0].coordinate.longitude)
+            } else {
+                let alertController = UIAlertController(title: "Unable to find location!", message: "Please try a different search string.", preferredStyle: UIAlertControllerStyle.Alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alertController, animated: false, completion: nil)
             }
+
         }
     }
     
