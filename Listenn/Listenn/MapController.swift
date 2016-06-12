@@ -22,7 +22,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
     // MARK: - Properties
     @IBOutlet weak var mapView: MKMapView!
     
-    let regionRadius: CLLocationDistance = 3000
+    let regionRadius: CLLocationDistance = 1000
     var searchedLocation: CLLocation?
     
     //instance of the wikimanager to make request to the API
@@ -101,6 +101,11 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
                     let pinLocation = CLLocationCoordinate2DMake(article.latitutde , article.longitude )
                     self.addAnnotationAtCoordinate(pinLocation, title: article.title)
                 }
+                
+                //center map on searched results
+                let article = Articles.queriedArticles![0]
+                let centerLocation = CLLocation(latitude: article.latitutde, longitude: article.longitude)
+                self.centerMapOnLocation(centerLocation)
             }
         })
     }
