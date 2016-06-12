@@ -42,6 +42,7 @@ public class WikiArticle : NSObject {
         self.url = NSURL(string: "http://en.wikipedia.org/wiki?curid=\(self.identifier)")
     }
     
+    //add intro of the article 
     func addIntro (intro: String) {
         self.intro = intro
     }

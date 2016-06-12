@@ -69,7 +69,7 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
       func listArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double) {
-        //request wikipedia articles with touch coordinates
+        //request wikipedia articles from user location
         wikiManager.requestResource(latitude, longitude: longitude, completion: { (gotArticles) in
             Articles.queriedArticles = gotArticles
             self.tableView.reloadData()
@@ -85,6 +85,8 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         speechUtterance.rate = rate
         speechUtterance.pitchMultiplier = pitch
         speechUtterance.volume = volume
+        
+        //settings for Play/Pause feature of sound
         if (index != TextToSpeech.previousIndex) {
             speechSynthesizer.stopSpeakingAtBoundary(AVSpeechBoundary.Immediate)
             speechSynthesizer.speakUtterance(speechUtterance)

@@ -11,6 +11,7 @@ import Alamofire
 
 class WikiManager: NSObject {
     
+    //Get articles using Lat and Long
     func requestResource(latitude: Double!, longitude: Double!, completion:(([WikiArticle]) -> Void)) {
         let path = "/w/api.php?action=query&format=json&list=geosearch&gscoord=\(latitude)%7C\(longitude)&gsradius=10000"
         
@@ -38,6 +39,7 @@ class WikiManager: NSObject {
         }
     }
     
+    //Get article intro using article ID
     func getArticleIntro(id: String!, completion:((String) -> Void)) {
         let path = "/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&pageids=\(id)"
         
