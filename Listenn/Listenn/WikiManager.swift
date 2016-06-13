@@ -35,7 +35,7 @@ class WikiManager: NSObject {
                         }
                     }
                 }
-                completion(articles.array as! [WikiArticle])
+            completion(articles.array as! [WikiArticle])
         }
     }
     
@@ -59,7 +59,7 @@ class WikiManager: NSObject {
                         }
                     }
                 }
-                completion(intro)
+            completion(intro)
         }
     }
 }

@@ -15,18 +15,21 @@ struct Articles {
     static var queriedArticles: [WikiArticle]?
 }
 
+//hold references for mapView and listView delegate methods
+var mapDelegate: ViewControllerDelegate?
+var listDelegate: ViewControllerDelegate?
+
+//hold the reference for MapControllerDelegate
+var listViewController: ListController?
+
 @objc protocol ViewControllerDelegate: class {
-    optional func mapArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double)
-    optional func listArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double)
+    optional func mapArticlesFromCurrentLocation(latitude: Double, longitude: Double)
+    optional func listArticlesFromCurrentLocation(latitude: Double, longitude: Double)
 }
 
 class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDelegate {
 
     @IBOutlet weak var mainView: UIView!
-    
-    //hold references for mapView and listView delegate methods
-    weak var mapDelegate: ViewControllerDelegate?
-    weak var listDelegate: ViewControllerDelegate?
     
     //container views for map and list
     @IBOutlet weak var mapContainerView: UIView!
@@ -42,8 +45,7 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Create the search bar programatically since you won't be
-        // able to drag one onto the navigation bar
+        //Create the search bar programatically
         self.searchBar = UISearchBar()
         searchBar.delegate = self
         self.searchBar.sizeToFit()
@@ -70,8 +72,8 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
     
     // MARK: LocationService Delegate
     func trackingLocation(currentLocation: CLLocation) {
-        mapDelegate?.mapArticlesFromCurrentLocation!(self, latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
-        listDelegate?.listArticlesFromCurrentLocation!(self, latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
+        mapDelegate?.mapArticlesFromCurrentLocation!((LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
+        listDelegate?.listArticlesFromCurrentLocation!((LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
         
         //Stop updating user location
         LocationService.sharedInstance.stopUpdatingLocation()
@@ -127,8 +129,8 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
         SVGeocoder.geocode(location) { (placemarks: [AnyObject]!, urlResponse: NSHTTPURLResponse!, error: NSError!) in
             
             if error == nil {
-                self.mapDelegate?.mapArticlesFromCurrentLocation!(self, latitude: placemarks[0].coordinate.latitude , longitude: placemarks[0].coordinate.longitude)
-                self.listDelegate?.listArticlesFromCurrentLocation!(self, latitude: placemarks[0].coordinate.latitude , longitude: placemarks[0].coordinate.longitude)
+                mapDelegate?.mapArticlesFromCurrentLocation!(placemarks[0].coordinate.latitude , longitude: placemarks[0].coordinate.longitude)
+                listDelegate?.listArticlesFromCurrentLocation!(placemarks[0].coordinate.latitude , longitude: placemarks[0].coordinate.longitude)
             } else {
                 let alertController = UIAlertController(title: "Unable to find location!", message: "Please try a different search string.", preferredStyle: UIAlertControllerStyle.Alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -164,14 +166,10 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
                 mapDelegate = mapController
             } else if identifier == "ListViewSegue" {
                 let listController = segue.destinationViewController as! ListController
+                listViewController = listController
                 listDelegate = listController
             }
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 

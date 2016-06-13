@@ -16,7 +16,7 @@ struct TextToSpeech {
     static var previousIndex: NSIndexPath = NSIndexPath()
 }
 
-class ListController: UIViewController, UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate, ViewControllerDelegate {
+class ListController: UIViewController, UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate, ViewControllerDelegate, MapControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -58,17 +58,16 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ArticleCell", forIndexPath: indexPath) as! ArticleCell
-        
         cell.buttonDelegate = self
         
         cell.titleLabel.text = Articles.queriedArticles![indexPath.row].title
         cell.distanceLabel.text = Articles.queriedArticles![indexPath.row].distance
         cell.setSelected(false, animated: true)
-        
         return cell
     }
     
-      func listArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double) {
+    //delegate method for ViewControllerDelegate
+    func listArticlesFromCurrentLocation(latitude: Double, longitude: Double) {
         //request wikipedia articles from user location
         wikiManager.requestResource(latitude, longitude: longitude, completion: { (gotArticles) in
             Articles.queriedArticles = gotArticles
@@ -76,7 +75,7 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         })
     }
     
-    //delegate methods for the Article Cell
+    //delegate methods for the ArticleCellDelegate
     func playSoundButtonClicked (articleCell: ArticleCell!) {
         let index = tableView.indexPathForCell(articleCell)
         let text = "Landmark. " + Articles.queriedArticles![(index?.row)!].title + ". Introduction. " + Articles.queriedArticles![(index?.row)!].intro
@@ -101,6 +100,26 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    //delegate method for MapControllerDelegate
+    func playSoundForMapView(title: String, intro: String) {
+        speechSynthesizer.stopSpeakingAtBoundary(AVSpeechBoundary.Immediate)
+        let text = "Landmark. " + title + ". Introduction. " + intro
+        
+        let speechUtterance = AVSpeechUtterance(string: text)
+        speechUtterance.rate = rate
+        speechUtterance.pitchMultiplier = pitch
+        speechUtterance.volume = volume
+        speechSynthesizer.speakUtterance(speechUtterance)
+    }
+    
+    //show wikipedia article using url
+    func getInfoButtonClicked (articleCell: ArticleCell!) {
+        let index = tableView.indexPathForCell(articleCell)
+        let infoUrl = Articles.queriedArticles![(index?.row)!].url
+        
+        UIApplication.sharedApplication().openURL(infoUrl)
+    }
+    
     //Text-to-Speech default settings
     func registerDefaultSettings() {
         rate = AVSpeechUtteranceDefaultSpeechRate
@@ -121,13 +140,5 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
             return true
         }
         return false
-    }
-    
-    //show wikipedia article using url
-    func getInfoButtonClicked (articleCell: ArticleCell!) {
-        let index = tableView.indexPathForCell(articleCell)
-        let infoUrl = Articles.queriedArticles![(index?.row)!].url
-        
-        UIApplication.sharedApplication().openURL(infoUrl)
     }
 }
