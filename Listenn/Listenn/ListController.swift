@@ -16,7 +16,7 @@ struct TextToSpeech {
     static var previousIndex: NSIndexPath = NSIndexPath()
 }
 
-class ListController: UIViewController, UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate, ViewControllerDelegate {
+class ListController: UIViewController, UITableViewDataSource, UITableViewDelegate, ArticleCellDelegate, ViewControllerDelegate, MapControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -68,7 +68,7 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-      func listArticlesFromCurrentLocation(vc: ViewController, latitude: Double, longitude: Double) {
+      func listArticlesFromCurrentLocation(latitude: Double, longitude: Double) {
         //request wikipedia articles from user location
         wikiManager.requestResource(latitude, longitude: longitude, completion: { (gotArticles) in
             Articles.queriedArticles = gotArticles
@@ -99,6 +99,19 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
             TextToSpeech.pausing = !TextToSpeech.pausing!
             speechSynthesizer.continueSpeaking()
         }
+    }
+    
+    func playSoundForMapView(title: String, intro: String) {
+        speechSynthesizer.stopSpeakingAtBoundary(AVSpeechBoundary.Immediate)
+        
+        let text = "Landmark. " + title + ". Introduction. " + intro
+        
+        let speechUtterance = AVSpeechUtterance(string: text)
+        speechUtterance.rate = rate
+        speechUtterance.pitchMultiplier = pitch
+        speechUtterance.volume = volume
+        
+        speechSynthesizer.speakUtterance(speechUtterance)
     }
     
     //Text-to-Speech default settings
