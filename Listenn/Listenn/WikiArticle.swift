@@ -42,21 +42,8 @@ public class WikiArticle : NSObject {
         self.url = NSURL(string: "http://en.wikipedia.org/wiki?curid=\(self.identifier)")
     }
     
-    //add intro of the article 
+    //add intro to the article
     func addIntro (intro: String) {
         self.intro = intro
     }
-    
-//    //MARK: - Equality
-//    func hash() -> Int {
-//        return self.title.hash
-//    }
-    
-//    override public func isEqual(object: AnyObject!) -> Bool {
-//        if self === object ||
-//            self.hash == object.hash {
-//                return true
-//        }
-//        return false
-//    }
 }

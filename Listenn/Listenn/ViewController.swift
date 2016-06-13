@@ -19,6 +19,7 @@ struct Articles {
 var mapDelegate: ViewControllerDelegate?
 var listDelegate: ViewControllerDelegate?
 
+//hold the reference for MapControllerDelegate
 var listViewController: ListController?
 
 @objc protocol ViewControllerDelegate: class {
@@ -44,8 +45,7 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Create the search bar programatically since you won't be
-        // able to drag one onto the navigation bar
+        //Create the search bar programatically
         self.searchBar = UISearchBar()
         searchBar.delegate = self
         self.searchBar.sizeToFit()
@@ -170,11 +170,6 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
                 listDelegate = listController
             }
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
 
