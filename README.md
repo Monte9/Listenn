@@ -1,16 +1,21 @@
-# Listenn iOS App
+# Listenn App
 
-**Listenn** is an iOS app that give you an audio tour of the city as your drive/walk past monument and landmarks allowing you to explore the city in fun and interactive way.
+**Listenn** is an iOS app that give you an audio tour of the city as your drive/walk past monument and landmarks allowing you to explore the city in an interactive way.
 
-Time spent: **5** hours spent in total
+Status: *In development*
+
+App store: **June 30th, 2016**
 
 ## User Stories
 
 The following features are implemented:
   
-- [x] Map view showing all the landmarks annotated on the map 
-- [x] List view showing all the landmarks within a 1 mile radius
-- [x] Plays audio on tapping a specific landmark on the list view
+- [x] Map view showing all the landmarks annotated on the map
+- [x] Map view allows dropping a pin to update landmarks
+- [x] List view showing all the landmarks with wikipedia web links & plays sound
+- [x] Map view annotation of landmarks gives directions and plays sound on touch
+- [x] Search capabilities to look up places directly with updated map and list view
+- [x] Location tracking keeps track of car/bike movement and updates landmarks periodically
 
 ## Video Walkthrough 
 
@@ -18,9 +23,21 @@ The following features are implemented:
 
 ## Notes
 
-The app uses Wikipedia API, Apple MapKit and text-to-speech features.
+The app uses Wikipedia API, Google's Geocoding API, Apple MapKit, Text-to-Speech and custom animations.
 
 Open to suggestions and feedback. Please email mthakkar@mail.sfsu.edu
+
+## Resources
+
+- [Google Geocodoing API](https://developers.google.com/maps/documentation/geocoding/start)
+
+- [Wikipedia API](https://www.mediawiki.org/wiki/API:Tutorial)
+
+- [SVGeocoder project](https://github.com/TransitApp/SVGeocoder)
+
+- [CLLocationManager project](https://github.com/igroomgrim/CLLocationManager-Singleton-in-Swift)
+
+- [MapLocationAnimation project](https://github.com/larrynatalicio/15DaysofAnimationsinSwift/tree/master/Animation%2003%20-%20MapLocationAnimation)
 
 ## License
 
