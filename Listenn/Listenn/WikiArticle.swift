@@ -40,10 +40,23 @@ public class WikiArticle : NSObject {
             self.longitude = longitude.doubleValue
         }
         self.url = NSURL(string: "http://en.wikipedia.org/wiki?curid=\(self.identifier)")
+        
+        //set maximum radius for mapView
+        maximumRadius()
     }
     
     //add intro to the article
     func addIntro (intro: String) {
         self.intro = intro
+    }
+    
+    func getDistanceAsDouble() -> Double {
+        let dist = distance.characters.split{$0 == " "}.map(String.init)
+        return Double(dist[1])!
+    }
+    
+    func maximumRadius() {
+        optimizedRadius = getDistanceAsDouble() > optimizedRadius ? getDistanceAsDouble() : optimizedRadius
+        print(optimizedRadius)
     }
 }

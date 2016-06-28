@@ -30,7 +30,7 @@ class WikiManager: NSObject {
                                 articles.addObject(article)
                                 self.getArticleIntro("\(item["pageid"] as! Int)") { (intro) in
                                     article.addIntro(intro)
-                                }
+                                }                                
                             }
                         }
                     }

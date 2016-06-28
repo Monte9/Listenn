@@ -10,6 +10,8 @@ import UIKit
 import MapKit
 import CoreLocation
 
+var optimizedRadius: CLLocationDistance = 0
+
 protocol MapControllerDelegate: class {
     func playSoundForMapView(title: String, intro: String)
 }
@@ -66,9 +68,6 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
             //remove previous annotations and overlays
             clearMap()
             
-            //center and draw radius aroudn current location
-            centerWithRadius(touchMapCoordinate.latitude, longitude: touchMapCoordinate.longitude)
-            
             //call listView delegate method to update list articles on dropping pin
             listDelegate?.listArticlesFromCurrentLocation!(touchMapCoordinate.latitude, longitude: touchMapCoordinate.longitude)
             
@@ -87,6 +86,8 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
                         let pinLocation = CLLocationCoordinate2DMake(article.latitutde , article.longitude )
                         self.addAnnotationAtCoordinate(pinLocation, title: article.title)
                     }
+                    //center and draw radius around current location
+                    self.centerWithRadius(touchMapCoordinate.latitude, longitude: touchMapCoordinate.longitude)
                 }
             })
         }
@@ -97,9 +98,6 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         
         //remove previous annotations and overlays
         clearMap()
-        
-        //center and draw radius aroudn current location
-        centerWithRadius(latitude, longitude: longitude)
         
         //request wikipedia articles with touch coordinates
         wikiManager.requestResource(latitude, longitude: longitude, completion: { (gotArticles) in
@@ -116,6 +114,8 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
                     let pinLocation = CLLocationCoordinate2DMake(article.latitutde , article.longitude )
                     self.addAnnotationAtCoordinate(pinLocation, title: article.title)
                 }
+                //center and draw radius around current location
+                self.centerWithRadius(latitude, longitude: longitude)
             }
         })
     }
@@ -163,6 +163,13 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         mapView.addAnnotation(annotation)
     }
     
+    //center map on user location
+    @IBAction func goToMyLocationButton(sender: AnyObject) {
+        // Set initial location for map view.
+        let initialLocation = CLLocation(latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)!, longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
+        centerMapOnLocation(initialLocation)
+    }
+    
     
     // MARK: - Convenience
     
@@ -170,22 +177,12 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
     func centerWithRadius(latitude: Double, longitude: Double) {
         // draw circular overlay centered in San Francisco
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let circleOverlay: MKCircle = MKCircle(centerCoordinate: coordinate, radius: 1000)
+        let circleOverlay: MKCircle = MKCircle(centerCoordinate: coordinate, radius: optimizedRadius)
         mapView.addOverlay(circleOverlay)
         
         //center map on searched results
         let centerLocation = CLLocation(latitude: latitude, longitude: longitude)
         self.centerMapOnLocation(centerLocation)
-    }
-    
-    //clears the map of annotations and overlays
-    func clearMap() {
-        let annotationsToRemove = self.mapView.annotations.filter { $0 !== self.mapView.userLocation }
-        self.mapView.removeAnnotations( annotationsToRemove )
-        let overlaysToRemove = self.mapView.overlays
-        for overlay in overlaysToRemove {
-            self.mapView.removeOverlay(overlay)
-        }
     }
     
     //draw overlay with radius
@@ -196,17 +193,23 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         return circleView
     }
     
-    //center map on user location
-    @IBAction func goToMyLocationButton(sender: AnyObject) {
-        // Set initial location for map view.
-        let initialLocation = CLLocation(latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)!, longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
-        centerMapOnLocation(initialLocation)
-    }
-    
     //center map on given location
     func centerMapOnLocation(location: CLLocation) {
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
         mapView.setRegion(coordinateRegion, animated: false)
+    }
+    
+    //clears the map of annotations and overlays
+    func clearMap() {
+        let annotationsToRemove = self.mapView.annotations.filter { $0 !== self.mapView.userLocation }
+        self.mapView.removeAnnotations( annotationsToRemove )
+        let overlaysToRemove = self.mapView.overlays
+        for overlay in overlaysToRemove {
+            self.mapView.removeOverlay(overlay)
+        }
+        
+        //reset the radius
+        optimizedRadius = 0
     }
     
     
