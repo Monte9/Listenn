@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18CB96233EAA62AE7E5B4618 /* Pods_Listenn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D18B52560359272E54FC7E82 /* Pods_Listenn.framework */; };
+		ECDBDF6E1D286C9700CCE6B3 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDBDF6D1D286C9700CCE6B3 /* FilterViewController.swift */; };
 		FA43D3951D0CB4C100551240 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43D3941D0CB4C100551240 /* LocationService.swift */; };
 		FA6436E31CDDA7A200484FFD /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6436E21CDDA7A200484FFD /* Annotation.swift */; };
 		FA6436E51CDDA7AF00484FFD /* SonarAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6436E41CDDA7AF00484FFD /* SonarAnnotationView.swift */; };
@@ -48,6 +49,7 @@
 		19590A08CB9695B9D5C3B729 /* Pods-Listenn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listenn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Listenn/Pods-Listenn.debug.xcconfig"; sourceTree = "<group>"; };
 		85929B717D0872683508A405 /* Pods-Listenn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listenn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Listenn/Pods-Listenn.release.xcconfig"; sourceTree = "<group>"; };
 		D18B52560359272E54FC7E82 /* Pods_Listenn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Listenn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECDBDF6D1D286C9700CCE6B3 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		FA43D3941D0CB4C100551240 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		FA6436E21CDDA7A200484FFD /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		FA6436E41CDDA7AF00484FFD /* SonarAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonarAnnotationView.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 				FA938B191CD84E5B00CD5E92 /* ViewController.swift */,
 				FA7CE0EA1CD8DC1A001F4268 /* MapController.swift */,
 				FA7CE0EE1CD8DF00001F4268 /* ListController.swift */,
+				ECDBDF6D1D286C9700CCE6B3 /* FilterViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				FA938B1A1CD84E5B00CD5E92 /* ViewController.swift in Sources */,
 				FABE61FA1CFA2FBB000C05A7 /* SVGeocoder.m in Sources */,
 				FAC0A74D1CD9E6CB00D33410 /* ArticleCell.swift in Sources */,
+				ECDBDF6E1D286C9700CCE6B3 /* FilterViewController.swift in Sources */,
 				FA6436E51CDDA7AF00484FFD /* SonarAnnotationView.swift in Sources */,
 				FA7CE0E91CD8D311001F4268 /* WikiArticle.swift in Sources */,
 				FA6436E31CDDA7A200484FFD /* Annotation.swift in Sources */,

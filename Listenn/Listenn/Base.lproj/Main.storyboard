@@ -69,10 +69,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Listnn" id="9KI-AY-CJe">
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="QCo-vH-oFp">
+                        <barButtonItem key="leftBarButtonItem" title="Filter" id="u1a-A6-nuM">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <action selector="appSettings:" destination="BYZ-38-t0r" id="ugs-nO-TRe"/>
+                                <action selector="filterSettings:" destination="BYZ-38-t0r" id="Iba-fz-ocE"/>
+                                <segue destination="UyN-Ly-tpO" kind="modal" id="as3-w9-rkF"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="7DQ-WQ-Ai1">
@@ -110,6 +111,64 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RZr-gS-qBv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="260" y="317"/>
+        </scene>
+        <!--Set Filters-->
+        <scene sceneID="fGw-Ov-mNw">
+            <objects>
+                <viewController id="mpp-U8-cmM" customClass="FilterViewController" customModule="Listenn" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4e2-nR-EDV"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ruz-fg-lxx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qPV-vB-RaV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="fAl-Jk-PdS">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterCell" id="qgq-Rm-R1O">
+                                        <rect key="frame" x="0.0" y="113.5" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qgq-Rm-R1O" id="FDI-g8-ELe">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ruz-fg-lxx" firstAttribute="top" secondItem="fAl-Jk-PdS" secondAttribute="bottom" id="BdL-6C-iDj"/>
+                            <constraint firstItem="fAl-Jk-PdS" firstAttribute="leading" secondItem="qPV-vB-RaV" secondAttribute="leading" id="P71-AS-uLR"/>
+                            <constraint firstAttribute="trailing" secondItem="fAl-Jk-PdS" secondAttribute="trailing" id="icz-xi-SWd"/>
+                            <constraint firstItem="fAl-Jk-PdS" firstAttribute="top" secondItem="qPV-vB-RaV" secondAttribute="top" id="vMs-s3-ajL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Set Filters" id="NMm-LH-KhK">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="5LM-eR-m60">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="cancelBarButton:" destination="mpp-U8-cmM" id="rtG-K2-xjf"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="p17-W6-rtK">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="doneBarButton:" destination="mpp-U8-cmM" id="2HL-FT-NyM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="fAl-Jk-PdS" id="9lA-5x-0Tc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A3i-k8-vsL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1110" y="-662"/>
         </scene>
         <!--Map Controller-->
         <scene sceneID="6D2-ul-won">
@@ -157,7 +216,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ler-3V-Zii" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1110" y="31"/>
+            <point key="canvasLocation" x="1110" y="-17"/>
         </scene>
         <!--List Controller-->
         <scene sceneID="IdN-Q2-5q1">
@@ -255,6 +314,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="355-tf-pGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1110" y="649"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1qV-6f-z0N">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UyN-Ly-tpO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Cki-W1-lHU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="mpp-U8-cmM" kind="relationship" relationship="rootViewController" id="r7u-sh-jOl"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cz5-xC-RzX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="668" y="-662"/>
         </scene>
     </scenes>
     <resources>

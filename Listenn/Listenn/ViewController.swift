@@ -155,7 +155,7 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
     }
     
     //implement settings view
-    @IBAction func appSettings(sender: AnyObject) {
+    @IBAction func filterSettings(sender: AnyObject) {
         print("Implement settings here")
     }
     
