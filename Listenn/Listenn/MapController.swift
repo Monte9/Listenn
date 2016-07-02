@@ -151,6 +151,14 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
             let appleMapsURL = "http://maps.apple.com/?q=\(view.annotation!.coordinate.latitude),\(view.annotation!.coordinate.longitude)"
             UIApplication.sharedApplication().openURL(NSURL(string: appleMapsURL)!)
         }))
+        alertController.addAction(UIAlertAction(title: "Open in Wikipedia", style: UIAlertActionStyle.Destructive, handler: { (action) in
+            for article in Articles.queriedArticles! {
+                if (view.annotation!.title! as? String!) == article.title {
+                    let infoUrl = article.url
+                    UIApplication.sharedApplication().openURL(infoUrl)
+                }
+            }
+        }))
         alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Cancel, handler: nil))
         self.presentViewController(alertController, animated: false, completion: nil)
     }
