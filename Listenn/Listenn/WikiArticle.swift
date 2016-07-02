@@ -41,8 +41,8 @@ public class WikiArticle : NSObject {
         }
         self.url = NSURL(string: "http://en.wikipedia.org/wiki?curid=\(self.identifier)")
         
-        //set maximum radius for mapView
-        maximumRadius()
+        //set maximum circle radius for mapView
+        maximumCircleRadius()
     }
     
     //add intro to the article
@@ -55,8 +55,7 @@ public class WikiArticle : NSObject {
         return Double(dist[1])!
     }
     
-    func maximumRadius() {
-        optimizedRadius = getDistanceAsDouble() > optimizedRadius ? getDistanceAsDouble() : optimizedRadius
-        print(optimizedRadius)
+    func maximumCircleRadius() {
+        optimizedCircleRadius = getDistanceAsDouble() > optimizedCircleRadius ? getDistanceAsDouble() : optimizedCircleRadius
     }
 }

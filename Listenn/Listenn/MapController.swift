@@ -10,7 +10,9 @@ import UIKit
 import MapKit
 import CoreLocation
 
-var optimizedRadius: CLLocationDistance = 0
+var optimizedCircleRadius: CLLocationDistance = 0
+//Region radius for the mapView
+var mapCenterRegionRadius: CLLocationDistance = 0
 
 protocol MapControllerDelegate: class {
     func playSoundForMapView(title: String, intro: String)
@@ -31,8 +33,6 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
     // MARK: - Properties
     @IBOutlet weak var mapView: MKMapView!
     
-    //Region radius for the mapView
-    let regionRadius: CLLocationDistance = 2500
     
     //instance of the wikimanager to make request to the API
     let wikiManager = WikiManager();
@@ -167,7 +167,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
     @IBAction func goToMyLocationButton(sender: AnyObject) {
         // Set initial location for map view.
         let initialLocation = CLLocation(latitude: (LocationService.sharedInstance.lastLocation?.coordinate.latitude)!, longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
-        centerMapOnLocation(initialLocation)
+        mapArticlesFromCurrentLocation(initialLocation.coordinate.latitude, longitude: initialLocation.coordinate.longitude)
     }
     
     
@@ -177,7 +177,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
     func centerWithRadius(latitude: Double, longitude: Double) {
         // draw circular overlay centered in San Francisco
         let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        let circleOverlay: MKCircle = MKCircle(centerCoordinate: coordinate, radius: optimizedRadius)
+        let circleOverlay: MKCircle = MKCircle(centerCoordinate: coordinate, radius: optimizedCircleRadius)
         mapView.addOverlay(circleOverlay)
         
         //center map on searched results
@@ -195,7 +195,8 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
     
     //center map on given location
     func centerMapOnLocation(location: CLLocation) {
-        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, regionRadius, regionRadius)
+        mapCenterRegionRadius = optimizedCircleRadius * 2.5
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, mapCenterRegionRadius, mapCenterRegionRadius)
         mapView.setRegion(coordinateRegion, animated: false)
     }
     
@@ -209,7 +210,7 @@ class MapController: UIViewController, MKMapViewDelegate, UIGestureRecognizerDel
         }
         
         //reset the radius
-        optimizedRadius = 0
+        optimizedCircleRadius = 0
     }
     
     
