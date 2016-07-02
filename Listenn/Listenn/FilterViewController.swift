@@ -12,8 +12,9 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     
     @IBOutlet weak var tableView: UITableView!
 
-    var sections = ["", "Wikipedia Landmarks"]
-    var filters = [["Filter 1", "Filter 2", "Filter 3"], ["Filter 1", "Filter 2", "Filter 3"]]
+    var sectionHeaders = ["", "Siri Voice", "Wikipedia Landmarks", "", ""]
+    var sectionFooters = ["For best experience, please turn on both.\nAlthough be aware of data usage.", "", "Makes your wikipedia search results more specific", "", ""]
+    var filters = [["Play sound automatically", "Update location with movement"],["Day", "Default", "Regina", "Taylor"], ["All", "Historic", "Modern", "Popular","Touristic"], ["Submit Feedback", "Rate the App"], ["Reset All Filters"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,17 +30,21 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     // MARK: - Table View Delegate methods
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return sections.count
+        return sectionHeaders.count
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return self.sectionHeaders[section]
+    }
+    
+    func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return self.sectionFooters[section]
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filters[section].count
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return self.sections[section]
-        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
