@@ -101,7 +101,7 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
                 cell.descriptionLabel.text = filters[indexPath.section][indexPath.row]
                 return cell
             case 2:
-                let cell = tableView.dequeueReusableCellWithIdentifier("SelectCell", forIndexPath: indexPath) as! SelectCell
+                let cell = tableView.dequeueReusableCellWithIdentifier("MultipleSelectCell", forIndexPath: indexPath) as! MultipleSelectCell
                 cell.descriptionLabel.text = filters[indexPath.section][indexPath.row]
                 return cell
             case 3:
@@ -141,10 +141,8 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
         let indexPath = tableView.indexPathForCell(switchCell)
         if (indexPath?.row == 0) {
             NSUserDefaults.standardUserDefaults().setObject(value, forKey: "soundSwitchValue")
-            print("Saved sound switch value")
         } else if (indexPath?.row == 1) {
             NSUserDefaults.standardUserDefaults().setObject(value, forKey: "locationSwitchValue")
-            print("Saved location switch value")
         }
     }
     

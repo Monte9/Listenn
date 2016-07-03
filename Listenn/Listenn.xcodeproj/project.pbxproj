@@ -13,6 +13,7 @@
 		ECDBDF731D288BEE00CCE6B3 /* SelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDBDF721D288BEE00CCE6B3 /* SelectCell.swift */; };
 		ECDBDF751D288BFB00CCE6B3 /* ResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDBDF741D288BFB00CCE6B3 /* ResetCell.swift */; };
 		ECDBDF771D288C2800CCE6B3 /* FeedbackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDBDF761D288C2800CCE6B3 /* FeedbackCell.swift */; };
+		ECDBDF791D28C9C500CCE6B3 /* MultipleSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDBDF781D28C9C500CCE6B3 /* MultipleSelectCell.swift */; };
 		FA43D3951D0CB4C100551240 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43D3941D0CB4C100551240 /* LocationService.swift */; };
 		FA6436E31CDDA7A200484FFD /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6436E21CDDA7A200484FFD /* Annotation.swift */; };
 		FA6436E51CDDA7AF00484FFD /* SonarAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6436E41CDDA7AF00484FFD /* SonarAnnotationView.swift */; };
@@ -58,6 +59,7 @@
 		ECDBDF721D288BEE00CCE6B3 /* SelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCell.swift; sourceTree = "<group>"; };
 		ECDBDF741D288BFB00CCE6B3 /* ResetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetCell.swift; sourceTree = "<group>"; };
 		ECDBDF761D288C2800CCE6B3 /* FeedbackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackCell.swift; sourceTree = "<group>"; };
+		ECDBDF781D28C9C500CCE6B3 /* MultipleSelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleSelectCell.swift; sourceTree = "<group>"; };
 		FA43D3941D0CB4C100551240 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		FA6436E21CDDA7A200484FFD /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		FA6436E41CDDA7AF00484FFD /* SonarAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonarAnnotationView.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				ECDBDF721D288BEE00CCE6B3 /* SelectCell.swift */,
 				ECDBDF741D288BFB00CCE6B3 /* ResetCell.swift */,
 				ECDBDF761D288C2800CCE6B3 /* FeedbackCell.swift */,
+				ECDBDF781D28C9C500CCE6B3 /* MultipleSelectCell.swift */,
 			);
 			name = FilterCells;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				ECDBDF771D288C2800CCE6B3 /* FeedbackCell.swift in Sources */,
 				FA43D3951D0CB4C100551240 /* LocationService.swift in Sources */,
 				FA938B181CD84E5B00CD5E92 /* AppDelegate.swift in Sources */,
+				ECDBDF791D28C9C500CCE6B3 /* MultipleSelectCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
