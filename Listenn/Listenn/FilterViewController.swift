@@ -48,9 +48,32 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FilterCell", forIndexPath: indexPath)
-        cell.textLabel?.text = filters[indexPath.section][indexPath.row]
-        return cell
+         switch(indexPath.section) {
+            case 0:
+                let cell = tableView.dequeueReusableCellWithIdentifier("SwitchCell", forIndexPath: indexPath) as! SwitchCell
+                cell.descriptionLabel.text = filters[indexPath.section][indexPath.row]
+                return cell
+            case 1:
+                let cell = tableView.dequeueReusableCellWithIdentifier("SelectCell", forIndexPath: indexPath) as! SelectCell
+                cell.descriptionLabel.text = filters[indexPath.section][indexPath.row]
+                return cell
+            case 2:
+                let cell = tableView.dequeueReusableCellWithIdentifier("SelectCell", forIndexPath: indexPath) as! SelectCell
+                cell.descriptionLabel.text = filters[indexPath.section][indexPath.row]
+                return cell
+            case 3:
+                let cell = tableView.dequeueReusableCellWithIdentifier("FeedbackCell", forIndexPath: indexPath) as! FeedbackCell
+                cell.feebackLabel.text = filters[indexPath.section][indexPath.row]
+                return cell
+            case 4:
+                let cell = tableView.dequeueReusableCellWithIdentifier("ResetCell", forIndexPath: indexPath) as! ResetCell
+                cell.resetLabel.text = filters[indexPath.section][indexPath.row]
+                return cell
+        default:
+            let cell = tableView.dequeueReusableCellWithIdentifier("SelectCell", forIndexPath: indexPath)
+            cell.textLabel?.text = filters[indexPath.section][indexPath.row]
+            return cell
+        }
     }
     
     @IBAction func cancelBarButton(sender: AnyObject) {

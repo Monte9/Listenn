@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		18CB96233EAA62AE7E5B4618 /* Pods_Listenn.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D18B52560359272E54FC7E82 /* Pods_Listenn.framework */; };
 		ECDBDF6E1D286C9700CCE6B3 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDBDF6D1D286C9700CCE6B3 /* FilterViewController.swift */; };
+		ECDBDF711D288BDA00CCE6B3 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDBDF701D288BDA00CCE6B3 /* SwitchCell.swift */; };
+		ECDBDF731D288BEE00CCE6B3 /* SelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDBDF721D288BEE00CCE6B3 /* SelectCell.swift */; };
+		ECDBDF751D288BFB00CCE6B3 /* ResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDBDF741D288BFB00CCE6B3 /* ResetCell.swift */; };
+		ECDBDF771D288C2800CCE6B3 /* FeedbackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDBDF761D288C2800CCE6B3 /* FeedbackCell.swift */; };
 		FA43D3951D0CB4C100551240 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA43D3941D0CB4C100551240 /* LocationService.swift */; };
 		FA6436E31CDDA7A200484FFD /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6436E21CDDA7A200484FFD /* Annotation.swift */; };
 		FA6436E51CDDA7AF00484FFD /* SonarAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6436E41CDDA7AF00484FFD /* SonarAnnotationView.swift */; };
@@ -50,6 +54,10 @@
 		85929B717D0872683508A405 /* Pods-Listenn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Listenn.release.xcconfig"; path = "Pods/Target Support Files/Pods-Listenn/Pods-Listenn.release.xcconfig"; sourceTree = "<group>"; };
 		D18B52560359272E54FC7E82 /* Pods_Listenn.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Listenn.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECDBDF6D1D286C9700CCE6B3 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		ECDBDF701D288BDA00CCE6B3 /* SwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
+		ECDBDF721D288BEE00CCE6B3 /* SelectCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCell.swift; sourceTree = "<group>"; };
+		ECDBDF741D288BFB00CCE6B3 /* ResetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetCell.swift; sourceTree = "<group>"; };
+		ECDBDF761D288C2800CCE6B3 /* FeedbackCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackCell.swift; sourceTree = "<group>"; };
 		FA43D3941D0CB4C100551240 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		FA6436E21CDDA7A200484FFD /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		FA6436E41CDDA7AF00484FFD /* SonarAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SonarAnnotationView.swift; sourceTree = "<group>"; };
@@ -119,6 +127,17 @@
 				D18B52560359272E54FC7E82 /* Pods_Listenn.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ECDBDF6F1D288B9500CCE6B3 /* FilterCells */ = {
+			isa = PBXGroup;
+			children = (
+				ECDBDF701D288BDA00CCE6B3 /* SwitchCell.swift */,
+				ECDBDF721D288BEE00CCE6B3 /* SelectCell.swift */,
+				ECDBDF741D288BFB00CCE6B3 /* ResetCell.swift */,
+				ECDBDF761D288C2800CCE6B3 /* FeedbackCell.swift */,
+			);
+			name = FilterCells;
 			sourceTree = "<group>";
 		};
 		FA43D3911D0CAFA000551240 /* Storyboard */ = {
@@ -222,6 +241,7 @@
 		FAC0A74B1CD9E6AD00D33410 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ECDBDF6F1D288B9500CCE6B3 /* FilterCells */,
 				FA6436E41CDDA7AF00484FFD /* SonarAnnotationView.swift */,
 				FAC0A74C1CD9E6CB00D33410 /* ArticleCell.swift */,
 			);
@@ -413,6 +433,7 @@
 				FA7CE0EB1CD8DC1A001F4268 /* MapController.swift in Sources */,
 				FAA2F2771CD8E41300F12C4B /* WikiManager.swift in Sources */,
 				FA7CE0EF1CD8DF00001F4268 /* ListController.swift in Sources */,
+				ECDBDF711D288BDA00CCE6B3 /* SwitchCell.swift in Sources */,
 				FABE61FB1CFA2FBB000C05A7 /* SVPlacemark.m in Sources */,
 				FA938B1A1CD84E5B00CD5E92 /* ViewController.swift in Sources */,
 				FABE61FA1CFA2FBB000C05A7 /* SVGeocoder.m in Sources */,
@@ -420,7 +441,10 @@
 				ECDBDF6E1D286C9700CCE6B3 /* FilterViewController.swift in Sources */,
 				FA6436E51CDDA7AF00484FFD /* SonarAnnotationView.swift in Sources */,
 				FA7CE0E91CD8D311001F4268 /* WikiArticle.swift in Sources */,
+				ECDBDF731D288BEE00CCE6B3 /* SelectCell.swift in Sources */,
 				FA6436E31CDDA7A200484FFD /* Annotation.swift in Sources */,
+				ECDBDF751D288BFB00CCE6B3 /* ResetCell.swift in Sources */,
+				ECDBDF771D288C2800CCE6B3 /* FeedbackCell.swift in Sources */,
 				FA43D3951D0CB4C100551240 /* LocationService.swift in Sources */,
 				FA938B181CD84E5B00CD5E92 /* AppDelegate.swift in Sources */,
 			);

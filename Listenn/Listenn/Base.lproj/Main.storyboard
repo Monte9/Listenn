@@ -129,13 +129,103 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterCell" id="qgq-Rm-R1O">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SwitchCell" id="qgq-Rm-R1O" customClass="SwitchCell" customModule="Listenn" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="113.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qgq-Rm-R1O" id="FDI-g8-ELe">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Play sound automatically" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZxC-gy-XRO">
+                                                    <rect key="frame" x="20" y="11" width="228" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Df9-Zg-IJR">
+                                                    <rect key="frame" x="256" y="6.5" width="51" height="31"/>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZxC-gy-XRO" firstAttribute="leading" secondItem="FDI-g8-ELe" secondAttribute="leading" constant="20" id="0ha-R2-X11"/>
+                                                <constraint firstAttribute="trailing" secondItem="Df9-Zg-IJR" secondAttribute="trailing" constant="15" id="20n-TE-fdc"/>
+                                                <constraint firstItem="Df9-Zg-IJR" firstAttribute="leading" secondItem="ZxC-gy-XRO" secondAttribute="trailing" constant="8" id="Stl-cC-dcF"/>
+                                                <constraint firstItem="Df9-Zg-IJR" firstAttribute="centerY" secondItem="FDI-g8-ELe" secondAttribute="centerY" id="ihX-XO-Qwb"/>
+                                                <constraint firstItem="ZxC-gy-XRO" firstAttribute="centerY" secondItem="FDI-g8-ELe" secondAttribute="centerY" id="qnp-CK-Tu4"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="ZxC-gy-XRO" id="nhs-ZS-6pL"/>
+                                            <outlet property="switchButton" destination="Df9-Zg-IJR" id="VhR-B0-MRk"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SelectCell" editingAccessoryType="checkmark" id="zdU-uK-YGw" customClass="SelectCell" customModule="Listenn" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="157.5" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zdU-uK-YGw" id="uCb-lh-Ugg">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Touristic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vE-1h-YZE">
+                                                    <rect key="frame" x="20" y="11.5" width="62" height="20.5"/>
+                                                    <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="4vE-1h-YZE" firstAttribute="leading" secondItem="uCb-lh-Ugg" secondAttribute="leading" constant="20" id="C8W-s5-eYU"/>
+                                                <constraint firstItem="4vE-1h-YZE" firstAttribute="centerY" secondItem="uCb-lh-Ugg" secondAttribute="centerY" id="cGJ-fr-6iv"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="4vE-1h-YZE" id="5gB-rU-aKg"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedbackCell" id="O6i-OA-v9u" customClass="FeedbackCell" customModule="Listenn" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="201.5" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="O6i-OA-v9u" id="JBU-WJ-nCc">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Submit Feedback" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAb-cH-CEN">
+                                                    <rect key="frame" x="97.5" y="12" width="125" height="21"/>
+                                                    <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cAb-cH-CEN" firstAttribute="centerX" secondItem="JBU-WJ-nCc" secondAttribute="centerX" id="YGu-Ly-jW6"/>
+                                                <constraint firstItem="cAb-cH-CEN" firstAttribute="centerY" secondItem="JBU-WJ-nCc" secondAttribute="centerY" id="qr7-dK-gJZ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="feebackLabel" destination="cAb-cH-CEN" id="IZ8-vU-qsE"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ResetCell" id="XlW-ZW-A2o" customClass="ResetCell" customModule="Listenn" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="245.5" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XlW-ZW-A2o" id="Dt9-zt-bUe">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reset All Filters" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ww5-6o-hkO">
+                                                    <rect key="frame" x="105" y="12" width="111.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                    <color key="textColor" red="0.90588235289999997" green="0.29803921570000003" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Ww5-6o-hkO" firstAttribute="centerY" secondItem="Dt9-zt-bUe" secondAttribute="centerY" id="EA8-E5-NC9"/>
+                                                <constraint firstItem="Ww5-6o-hkO" firstAttribute="centerX" secondItem="Dt9-zt-bUe" secondAttribute="centerX" id="QYz-cQ-gKi"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="resetLabel" destination="Ww5-6o-hkO" id="yjD-jl-ZYs"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
