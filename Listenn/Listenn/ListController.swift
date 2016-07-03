@@ -66,6 +66,10 @@ class ListController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     //delegate method for ViewControllerDelegate
     func listArticlesFromCurrentLocation(latitude: Double, longitude: Double) {
         //request wikipedia articles from user location
