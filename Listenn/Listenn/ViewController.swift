@@ -75,8 +75,13 @@ class ViewController: UIViewController, UISearchBarDelegate, LocationServiceDele
         mapDelegate?.mapArticlesFromCurrentLocation!((LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
         listDelegate?.listArticlesFromCurrentLocation!((LocationService.sharedInstance.lastLocation?.coordinate.latitude)! , longitude: (LocationService.sharedInstance.lastLocation?.coordinate.longitude)!)
         
-        //Stop updating user location
-        LocationService.sharedInstance.stopUpdatingLocation()
+        if let value = savedState.objectForKey("locationSwitchValue") {
+            if value.boolValue == false {
+                print("update location off")
+                //Stop updating user location
+                LocationService.sharedInstance.stopUpdatingLocation()
+            }
+        }
     }
     
     // MARK: LocationService Delegate

@@ -8,12 +8,14 @@
 
 import UIKit
 
+var savedState = NSUserDefaults.standardUserDefaults()
+
 class FilterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwitchCellDelegate {
     
     @IBOutlet weak var tableView: UITableView!
 
     var sectionHeaders = ["", "Siri Voice", "Wikipedia Landmarks", "", ""]
-    var sectionFooters = ["For best experience, please turn on both.\nPlease be mindful of cellular data usage.", "", "Makes your wikipedia search results more specific", "", ""]
+    var sectionFooters = ["For best experience, please turn on both.", "", "Makes your wikipedia search results more specific", "", ""]
     var filters = [["Play sound automatically", "Update location with movement"],["Day", "Default", "Regina", "Taylor"], ["All", "Historic", "Modern", "Popular","Touristic"], ["Submit Feedback", "Rate the App"], ["Reset All Filters"]]
     
     var filterVoiceIndex: NSIndexPath?
@@ -50,7 +52,6 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var savedState = NSUserDefaults.standardUserDefaults()
         var indexNumber = NSNumber(integer: indexPath.row)
         
         switch(indexPath.section) {
