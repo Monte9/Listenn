@@ -21,6 +21,17 @@ The following features are implemented:
 
 ![Listenn app walkthrough](listenn.gif)
 
+## App Idea
+
+<img src="http://i.imgur.com/ValXfPS.jpg" width=450 />
+
+## Mocks
+
+<img src="http://i.imgur.com/NTt9EZR.jpg" width=450 />
+<img src="http://i.imgur.com/46WmXcP.jpg" width=450 />
+<img src="http://i.imgur.com/TD5Zuns.jpg" width=450 />
+<img src="http://i.imgur.com/yorRcHh.jpg" width=450 />
+
 ## Notes
 
 The app uses Wikipedia API, Google's Geocoding API, Apple MapKit, Text-to-Speech and custom animations.
