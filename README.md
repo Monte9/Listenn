@@ -27,10 +27,11 @@ The following features are implemented:
 
 ## Mocks
 
-<img src="http://i.imgur.com/NTt9EZR.jpg" width=450 />
-<img src="http://i.imgur.com/46WmXcP.jpg" width=450 />
-<img src="http://i.imgur.com/TD5Zuns.jpg" width=450 />
-<img src="http://i.imgur.com/yorRcHh.jpg" width=450 />
+<img src="http://i.imgur.com/yorRcHh.jpg" width=650 />
+
+<img src="http://i.imgur.com/NTt9EZR.jpg" width=300 />
+<img src="http://i.imgur.com/46WmXcP.jpg" width=300 />
+<img src="http://i.imgur.com/TD5Zuns.jpg" width=300 />
 
 ## Notes
 
